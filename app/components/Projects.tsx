@@ -32,6 +32,15 @@ const projects = [
     github: "https://github.com/username/project2",
     demo: "https://demo.com/project2",
   },
+  {
+    title: "Agentic Desktop Automation",
+    description:
+      "An intelligent agent that organizes your desktop, manages files, automates emails, interacts with your browser, and streamlines daily tasks seamlessly.",
+    image: "/Agentic.jpg",
+    tags: ["RAG", "NLP", "Backend Development"],
+    github: "https://github.com/username/project2",
+    demo: "https://demo.com/project2",
+  },
 ];
 
 export default function Projects() {
