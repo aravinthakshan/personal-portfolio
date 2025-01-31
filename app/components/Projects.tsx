@@ -54,7 +54,7 @@ const projects = [
     title: "JavaTorch",
     description:
       "A deep learning framework built on Java, a basic level replica of pytorch's functionalities in java.",
-    image: "/Agentics.jpg",
+    image: "/javatorch.png",
     tags: ["Deep Learning", "AI", "Java", "PyTorch"],
     github: "https://github.com/username/project2",
     demo: "https://demo.com/project2",
