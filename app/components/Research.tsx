@@ -1,38 +1,48 @@
 "use client"
 
 import { motion } from "framer-motion"
+import Image from "next/image"
+import { FlaskRoundIcon as Flask, Network, Binary } from "lucide-react"
 
 const research = [
   {
     title: "Research Apprenticeship at Arizona State University",
+    image: "/placeholder.svg",
     description:
       "Working on prostate cancer stage classification using a random walk algorithm and Graph Neural Networks in collaboration with Wu-Lab.",
+    icon: <Network className="w-8 h-8" />,
   },
   {
     title: "Undergraduate Researcher at MIT Manipal",
+    image: "/placeholder.svg",
     description:
       'Co-authored "AdaptPhishSysNet: Adaptive Phishing Detection System for Blockchains using Machine Learning" - accepted at ISBM Conference 2024.',
+    icon: <Binary className="w-8 h-8" />,
   },
   {
     title: "Research Apprenticeship at Indian Statistical Institute",
+    image: "/placeholder.svg",
     description:
       "Designing a custom clustering algorithm for small object detection in wildlife monitoring using UAVs.",
+    icon: <Flask className="w-8 h-8" />,
   },
 ]
 
 export default function Research() {
   return (
-    <section id="research" className="py-20 px-6">
-      <div className="max-w-7xl mx-auto">
-        <motion.h2
-          className="text-3xl font-bold mb-12"
+    <section id="research" className="py-20 px-6 relative overflow-hidden">
+      <div className="absolute top-1/2 right-0 w-1/3 h-1/3 bg-purple-500/20 blur-[120px] rounded-full" />
+      <div className="max-w-7xl mx-auto relative z-10">
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
+          className="mb-12"
         >
-          Research
-        </motion.h2>
+          <h2 className="text-3xl font-bold gradient-text">Research</h2>
+          <p className="text-gray-400 mt-2">Contributing to academic research in AI and Machine Learning.</p>
+        </motion.div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {research.map((item, index) => (
             <motion.div
@@ -41,10 +51,22 @@ export default function Research() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="bg-gray-900/50 p-6 rounded-lg"
+              className="card-gradient rounded-xl overflow-hidden group"
             >
-              <h3 className="text-xl font-semibold mb-4 text-yellow-400">{item.title}</h3>
-              <p className="text-gray-300">{item.description}</p>
+              <div className="relative h-48">
+                <Image
+                  src={item.image || "/placeholder.svg"}
+                  alt={item.title}
+                  fill
+                  className="object-cover transition-transform group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <div className="absolute bottom-4 left-4 text-white bg-indigo-600/90 p-2 rounded-lg">{item.icon}</div>
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-semibold mb-4 text-indigo-400">{item.title}</h3>
+                <p className="text-gray-300">{item.description}</p>
+              </div>
             </motion.div>
           ))}
         </div>
