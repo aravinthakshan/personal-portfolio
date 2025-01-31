@@ -41,6 +41,24 @@ const projects = [
     github: "https://github.com/username/project2",
     demo: "https://demo.com/project2",
   },
+  {
+    title: "OpenCV Hand and Face Tracker",
+    description:
+      "A computer vision application using OpenCV to track hand gestures and facial features while detecting background objects in real-time. Deployed seamlessly on Streamlit for interactive visualization.",
+    image: "/Opencv.jpg",
+    tags: ["Computer Vision", "AI", "Streamlit", "Object Detection"],
+    github: "https://github.com/username/project2",
+    demo: "https://demo.com/project2",
+  },
+  {
+    title: "JavaTorch",
+    description:
+      "A deep learning framework built on Java, a basic level replica of pytorch's functionalities in java.",
+    image: "/Agentics.jpg",
+    tags: ["Deep Learning", "AI", "Java", "PyTorch"],
+    github: "https://github.com/username/project2",
+    demo: "https://demo.com/project2",
+  },
 ];
 
 export default function Projects() {
