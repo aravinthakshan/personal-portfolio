@@ -1,11 +1,14 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Mail, Phone, Github, Linkedin } from "lucide-react"
+import { motion } from "framer-motion";
+import { Mail, Phone, Github, Linkedin } from "lucide-react";
 
 export default function Contact({ id }: { id?: string }) {
   return (
-    <section id={id} className="py-12 px-6 bg-[#0A0B14] relative overflow-hidden">
+    <section
+      id={id}
+      className="py-12 px-6 bg-[#0A0B14] relative overflow-hidden"
+    >
       <div className="absolute bottom-0 right-0 w-1/3 h-1/3 bg-[#6366F1]/20 blur-[120px] rounded-full" />
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.div
@@ -16,7 +19,9 @@ export default function Contact({ id }: { id?: string }) {
           className="mb-8 text-center"
         >
           <h2 className="text-3xl font-bold gradient-text">Get in Touch</h2>
-          <p className="text-gray-400 mt-2">Let's collaborate on something amazing.</p>
+          <p className="text-gray-400 mt-2">
+            Let's collaborate on something amazing.
+          </p>
         </motion.div>
 
         <motion.div
@@ -33,7 +38,7 @@ export default function Contact({ id }: { id?: string }) {
             <div className="bg-[#1A1B23] p-3 rounded-full group-hover:bg-[#6366F1]/10 transition-colors">
               <Mail className="w-5 h-5" />
             </div>
-            <span className="text-sm">Email</span>
+            <span className="text-sm">aravinthakshanmain@gmail.com</span>
           </a>
           <a
             href="tel:+918754563674"
@@ -42,7 +47,7 @@ export default function Contact({ id }: { id?: string }) {
             <div className="bg-[#1A1B23] p-3 rounded-full group-hover:bg-[#6366F1]/10 transition-colors">
               <Phone className="w-5 h-5" />
             </div>
-            <span className="text-sm">Phone</span>
+            <span className="text-sm">+91 8754563674</span>
           </a>
           <a
             href="https://github.com/aravinthakshan"
@@ -53,7 +58,7 @@ export default function Contact({ id }: { id?: string }) {
             <div className="bg-[#1A1B23] p-3 rounded-full group-hover:bg-[#6366F1]/10 transition-colors">
               <Github className="w-5 h-5" />
             </div>
-            <span className="text-sm">GitHub</span>
+            <span className="text-sm">github.com/aravinthakshan</span>
           </a>
           <a
             href="https://linkedin.com/in/aravinthakshan"
@@ -64,11 +69,10 @@ export default function Contact({ id }: { id?: string }) {
             <div className="bg-[#1A1B23] p-3 rounded-full group-hover:bg-[#6366F1]/10 transition-colors">
               <Linkedin className="w-5 h-5" />
             </div>
-            <span className="text-sm">LinkedIn</span>
+            <span className="text-sm">linkedin.com/in/aravinthakshan</span>
           </a>
         </motion.div>
       </div>
     </section>
-  )
+  );
 }
-
