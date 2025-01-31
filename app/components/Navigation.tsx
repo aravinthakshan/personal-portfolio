@@ -1,20 +1,17 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useScroll, useTransform } from "framer-motion"
 import Link from "next/link"
 import { useState } from "react"
 import { Menu, X } from "lucide-react"
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
+  const { scrollY } = useScroll()
+  const backgroundColor = useTransform(scrollY, [0, 50], ["rgba(10, 10, 20, 0)", "rgba(10, 10, 20, 0.8)"])
 
   return (
-    <motion.header
-      className="fixed w-full z-50 px-6 py-4"
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
+    <motion.header className="fixed w-full z-50 px-6 py-4 transition-colors duration-300" style={{ backgroundColor }}>
       <nav className="max-w-7xl mx-auto flex justify-between items-center">
         <Link href="/" className="text-xl font-bold gradient-text">
           Aravinthakshan
@@ -30,6 +27,9 @@ export default function Navigation() {
           </Link>
           <Link href="#projects" className="text-gray-400 hover:text-indigo-400 transition-colors">
             Projects
+          </Link>
+          <Link href="#skills" className="text-gray-400 hover:text-indigo-400 transition-colors">
+            Skills
           </Link>
           <Link href="#contact" className="text-gray-400 hover:text-indigo-400 transition-colors">
             Contact
@@ -78,6 +78,13 @@ export default function Navigation() {
               onClick={() => setIsOpen(false)}
             >
               Projects
+            </Link>
+            <Link
+              href="#skills"
+              className="text-gray-400 hover:text-indigo-400 transition-colors"
+              onClick={() => setIsOpen(false)}
+            >
+              Skills
             </Link>
             <Link
               href="#contact"
