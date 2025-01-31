@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Brain, Code, Database } from "lucide-react"
+import { Brain, Code, Database, Building2 } from "lucide-react"
 
 const experiences = [
   {
@@ -34,11 +34,31 @@ const experiences = [
       'Implemented Deep Learning and Machine Learning algorithms from scratch. Working on "De-FiNet", a novel image denoising architecture.',
     icon: <Database className="w-6 h-6" />,
   },
+  {
+    company: "Larsen and Toubro Limited",
+    logo: "/placeholder.svg",
+    role: "ML and NLP Intern",
+    location: "Chennai, Tamil Nadu",
+    date: "June-July 2024",
+    description:
+      "Standardized construction activity codes in a master database utilizing the Gemini API, Google Cloud, and NLTK library. Incorporated a semantic search feature using embeddings in a Pinecone vector database.",
+    icon: <Building2 className="w-6 h-6" />,
+  },
+  {
+    company: "BugBase",
+    logo: "/placeholder.svg",
+    role: "Founders Office Intern",
+    location: "Manipal, Karnataka",
+    date: "Feb-May 2024",
+    description:
+      "Helped improve the automated Bug Triaging ML Model using an application of RAG (Retrieval-Augmented-Generation).",
+    icon: <Code className="w-6 h-6" />,
+  },
 ]
 
-export default function Experience() {
+export default function Experience({ id }: { id?: string }) {
   return (
-    <section id="experience" className="py-20 px-6">
+    <section id={id} className="py-20 px-6 bg-[#0A0B14]">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -63,18 +83,18 @@ export default function Experience() {
             >
               <div className="flex items-start gap-6">
                 <div className="relative flex-shrink-0">
-                  <div className="w-16 h-16 rounded-full overflow-hidden bg-gray-800 flex items-center justify-center text-indigo-400">
+                  <div className="w-16 h-16 rounded-full overflow-hidden bg-[#1A1B23] flex items-center justify-center text-[#6366F1]">
                     {exp.icon}
                   </div>
                 </div>
                 <div className="flex-1">
                   <div className="flex flex-wrap justify-between items-start mb-4">
                     <div>
-                      <h3 className="text-xl font-semibold text-indigo-400">{exp.company}</h3>
+                      <h3 className="text-xl font-semibold text-[#6366F1]">{exp.company}</h3>
                       <p className="text-lg text-gray-300">{exp.role}</p>
                       <p className="text-gray-400">{exp.location}</p>
                     </div>
-                    <span className="text-gray-400 text-sm bg-gray-800/50 px-3 py-1 rounded-full">{exp.date}</span>
+                    <span className="text-gray-400 text-sm bg-[#1A1B23] px-3 py-1 rounded-full">{exp.date}</span>
                   </div>
                   <p className="text-gray-300">{exp.description}</p>
                 </div>

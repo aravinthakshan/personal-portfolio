@@ -45,9 +45,9 @@ const certifications = [
   "Version Control with Git",
 ]
 
-export default function Skills() {
+export default function Skills({ id }: { id?: string }) {
   return (
-    <section className="py-20 px-6 relative overflow-hidden">
+    <section id={id} className="py-20 px-6 bg-[#0A0B14] relative overflow-hidden">
       <div className="absolute top-1/2 left-0 w-1/3 h-1/3 bg-indigo-500/20 blur-[120px] rounded-full" />
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.div

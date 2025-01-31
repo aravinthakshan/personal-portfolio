@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import Image from "next/image"
-import { FlaskRoundIcon as Flask, Network, Binary } from "lucide-react"
+import { BookOpen } from "lucide-react"
 
 const research = [
   {
@@ -10,28 +10,28 @@ const research = [
     image: "/placeholder.svg",
     description:
       "Working on prostate cancer stage classification using a random walk algorithm and Graph Neural Networks in collaboration with Wu-Lab.",
-    icon: <Network className="w-8 h-8" />,
+    icon: <BookOpen className="w-6 h-6" />,
   },
   {
     title: "Undergraduate Researcher at MIT Manipal",
     image: "/placeholder.svg",
     description:
       'Co-authored "AdaptPhishSysNet: Adaptive Phishing Detection System for Blockchains using Machine Learning" - accepted at ISBM Conference 2024.',
-    icon: <Binary className="w-8 h-8" />,
+    icon: <BookOpen className="w-6 h-6" />,
   },
   {
     title: "Research Apprenticeship at Indian Statistical Institute",
     image: "/placeholder.svg",
     description:
       "Designing a custom clustering algorithm for small object detection in wildlife monitoring using UAVs.",
-    icon: <Flask className="w-8 h-8" />,
+    icon: <BookOpen className="w-6 h-6" />,
   },
 ]
 
-export default function Research() {
+export default function Research({ id }: { id?: string }) {
   return (
-    <section id="research" className="py-20 px-6 relative overflow-hidden">
-      <div className="absolute top-1/2 right-0 w-1/3 h-1/3 bg-purple-500/20 blur-[120px] rounded-full" />
+    <section id={id} className="py-20 px-6 bg-[#0A0B14] relative overflow-hidden">
+      <div className="absolute top-1/2 right-0 w-1/3 h-1/3 bg-[#6366F1]/20 blur-[120px] rounded-full" />
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -61,10 +61,9 @@ export default function Research() {
                   className="object-cover transition-transform group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                <div className="absolute bottom-4 left-4 text-white bg-indigo-600/90 p-2 rounded-lg">{item.icon}</div>
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-semibold mb-4 text-indigo-400">{item.title}</h3>
+                <h3 className="text-xl font-semibold mb-4 text-[#6366F1]">{item.title}</h3>
                 <p className="text-gray-300">{item.description}</p>
               </div>
             </motion.div>
