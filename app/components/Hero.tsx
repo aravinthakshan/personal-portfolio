@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import Image from "next/image"
-import { Github, Linkedin, Mail, Brain, Code } from "lucide-react"
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { Github, Linkedin, Mail, Brain, Code, Book } from "lucide-react";
 
 export default function Hero() {
   return (
@@ -20,8 +20,12 @@ export default function Hero() {
         >
           <div className="space-y-2">
             <h2 className="text-lg text-indigo-400 font-medium">Hello! I'm</h2>
-            <h1 className="text-5xl md:text-6xl font-bold gradient-text">A S Aravinthakshan</h1>
-            <p className="text-xl text-gray-400">Machine Learning Engineer & Full Stack Developer</p>
+            <h1 className="text-5xl md:text-6xl font-bold gradient-text">
+              A S Aravinthakshan
+            </h1>
+            <p className="text-xl text-gray-400">
+              Machine Learning Engineer & Full Stack Developer
+            </p>
           </div>
 
           <div className="flex gap-4">
@@ -71,7 +75,7 @@ export default function Hero() {
               <p className="text-sm text-gray-400">Deep Learning Expert</p>
             </div>
             <div className="card-gradient p-4 rounded-lg">
-              <Brain className="w-8 h-8 text-indigo-400 mb-2" />
+              <Book className="w-8 h-8 text-indigo-400 mb-2" />
               <h3 className="font-semibold">Research ML</h3>
               <p className="text-sm text-gray-400">Machine Learning Research</p>
             </div>
@@ -91,11 +95,15 @@ export default function Hero() {
         >
           <div className="w-full h-full absolute -z-10 bg-indigo-500/20 blur-[120px] rounded-full" />
           <div className="relative w-full aspect-square max-w-md mx-auto">
-            <Image src="/placeholder.svg" alt="Profile" fill className="object-cover rounded-2xl" />
+            <Image
+              src="/placeholder.svg"
+              alt="Profile"
+              fill
+              className="object-cover rounded-2xl"
+            />
           </div>
         </motion.div>
       </div>
     </section>
-  )
+  );
 }
-
