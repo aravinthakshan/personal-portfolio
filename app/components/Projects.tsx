@@ -36,8 +36,8 @@ const projects = [
     title: "Agentic Desktop Automation",
     description:
       "An intelligent agent that organizes your desktop, manages files, automates emails, interacts with your browser, and streamlines daily tasks seamlessly.",
-    image: "/Agentic.jpg",
-    tags: ["RAG", "NLP", "Backend Development"],
+    image: "/Agentics.jpg",
+    tags: ["RAG", "Agentic AI", "Docker"],
     github: "https://github.com/username/project2",
     demo: "https://demo.com/project2",
   },
@@ -65,7 +65,7 @@ export default function Projects() {
             Showcasing my best work in AI and software development.
           </p>
         </motion.div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <motion.div
               key={project.title}
