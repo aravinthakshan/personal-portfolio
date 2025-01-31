@@ -96,7 +96,7 @@ export default function Hero() {
           <div className="w-full h-full absolute -z-10 bg-indigo-500/20 blur-[120px] rounded-full" />
           <div className="relative w-full aspect-square max-w-md mx-auto">
             <Image
-              src="/placeholder.svg"
+              src="/profile-pic.jpeg"
               alt="Profile"
               fill
               className="object-cover rounded-2xl"
