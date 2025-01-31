@@ -29,48 +29,43 @@ export default function Contact({ id }: { id?: string }) {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto"
+          className="flex flex-wrap justify-center gap-x-8 gap-y-4 max-w-4xl mx-auto"
         >
-          <a
-            href="mailto:aravinthakshanmain@gmail.com"
-            className="flex items-center gap-3 text-gray-400 hover:text-[#6366F1] transition-colors group"
-          >
-            <div className="bg-[#1A1B23] p-3 rounded-full group-hover:bg-[#6366F1]/10 transition-colors">
-              <Mail className="w-5 h-5" />
-            </div>
-            <span className="text-sm">aravinthakshanmain@gmail.com</span>
-          </a>
-          <a
-            href="tel:+918754563674"
-            className="flex items-center gap-3 text-gray-400 hover:text-[#6366F1] transition-colors group"
-          >
-            <div className="bg-[#1A1B23] p-3 rounded-full group-hover:bg-[#6366F1]/10 transition-colors">
-              <Phone className="w-5 h-5" />
-            </div>
-            <span className="text-sm">+91 8754563674</span>
-          </a>
-          <a
-            href="https://github.com/aravinthakshan"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-3 text-gray-400 hover:text-[#6366F1] transition-colors group"
-          >
-            <div className="bg-[#1A1B23] p-3 rounded-full group-hover:bg-[#6366F1]/10 transition-colors">
-              <Github className="w-5 h-5" />
-            </div>
-            <span className="text-sm">github.com/aravinthakshan</span>
-          </a>
-          <a
-            href="https://linkedin.com/in/aravinthakshan"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-3 text-gray-400 hover:text-[#6366F1] transition-colors group"
-          >
-            <div className="bg-[#1A1B23] p-3 rounded-full group-hover:bg-[#6366F1]/10 transition-colors">
-              <Linkedin className="w-5 h-5" />
-            </div>
-            <span className="text-sm">linkedin.com/in/aravinthakshan</span>
-          </a>
+          {[
+            {
+              href: "mailto:aravinthakshanmain@gmail.com",
+              icon: Mail,
+              text: "aravinthakshanmain@gmail.com",
+            },
+            {
+              href: "tel:+918754563674",
+              icon: Phone,
+              text: "+91 8754563674",
+            },
+            {
+              href: "https://github.com/aravinthakshan",
+              icon: Github,
+              text: "github.com/aravinthakshan",
+            },
+            {
+              href: "https://linkedin.com/in/aravinthakshan",
+              icon: Linkedin,
+              text: "linkedin.com/in/aravinthakshan",
+            },
+          ].map(({ href, icon: Icon, text }) => (
+            <a
+              key={text}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 text-gray-400 hover:text-[#6366F1] transition-colors group"
+            >
+              <div className="bg-[#1A1B23] p-3 rounded-full group-hover:bg-[#6366F1]/10 transition-colors">
+                <Icon className="w-5 h-5" />
+              </div>
+              <span className="text-sm">{text}</span>
+            </a>
+          ))}
         </motion.div>
       </div>
     </section>
