@@ -8,7 +8,15 @@ import { Menu, X } from "lucide-react"
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const { scrollY } = useScroll()
-  const backgroundColor = useTransform(scrollY, [0, 50], ["rgba(10, 10, 20, 0)", "rgba(10, 10, 20, 0.8)"])
+  const backgroundColor = useTransform(scrollY, [0, 50], ["rgba(10, 10, 20, 0)", "rgba(10, 10, 20, 0.95)"])
+
+  const scrollToSection = (sectionId: string) => {
+    const section = document.getElementById(sectionId)
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" })
+    }
+    setIsOpen(false)
+  }
 
   return (
     <motion.header className="fixed w-full z-50 px-6 py-4 transition-colors duration-300" style={{ backgroundColor }}>
@@ -19,28 +27,23 @@ export default function Navigation() {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8">
-          <Link href="#experience" className="text-gray-400 hover:text-indigo-400 transition-colors">
-            Experience
-          </Link>
-          <Link href="#research" className="text-gray-400 hover:text-indigo-400 transition-colors">
-            Research
-          </Link>
-          <Link href="#projects" className="text-gray-400 hover:text-indigo-400 transition-colors">
-            Projects
-          </Link>
-          <Link href="#skills" className="text-gray-400 hover:text-indigo-400 transition-colors">
-            Skills
-          </Link>
-          <Link href="#contact" className="text-gray-400 hover:text-indigo-400 transition-colors">
-            Contact
-          </Link>
-          <motion.button
+          {["experience", "research", "projects", "skills", "contact"].map((section) => (
+            <button
+              key={section}
+              onClick={() => scrollToSection(section)}
+              className="text-gray-400 hover:text-indigo-400 transition-colors capitalize"
+            >
+              {section}
+            </button>
+          ))}
+          <motion.a
+            href="mailto:aravinthakshanmain@gmail.com"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="px-4 py-2 bg-indigo-600 text-white rounded-lg"
           >
-            Resume
-          </motion.button>
+            Contact Me
+          </motion.a>
         </div>
 
         {/* Mobile Navigation Toggle */}
@@ -58,47 +61,22 @@ export default function Navigation() {
           className="absolute top-full left-0 right-0 bg-gray-900/95 backdrop-blur-sm py-4 px-6 md:hidden"
         >
           <div className="flex flex-col gap-4">
-            <Link
-              href="#experience"
-              className="text-gray-400 hover:text-indigo-400 transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              Experience
-            </Link>
-            <Link
-              href="#research"
-              className="text-gray-400 hover:text-indigo-400 transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              Research
-            </Link>
-            <Link
-              href="#projects"
-              className="text-gray-400 hover:text-indigo-400 transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              Projects
-            </Link>
-            <Link
-              href="#skills"
-              className="text-gray-400 hover:text-indigo-400 transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              Skills
-            </Link>
-            <Link
-              href="#contact"
-              className="text-gray-400 hover:text-indigo-400 transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              Contact
-            </Link>
-            <motion.button
+            {["experience", "research", "projects", "skills", "contact"].map((section) => (
+              <button
+                key={section}
+                onClick={() => scrollToSection(section)}
+                className="text-gray-400 hover:text-indigo-400 transition-colors capitalize text-left"
+              >
+                {section}
+              </button>
+            ))}
+            <motion.a
+              href="mailto:aravinthakshanmain@gmail.com"
               whileTap={{ scale: 0.95 }}
               className="px-4 py-2 bg-indigo-600 text-white rounded-lg text-left"
             >
-              Resume
-            </motion.button>
+              Contact Me
+            </motion.a>
           </div>
         </motion.div>
       )}

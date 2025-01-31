@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import Image from "next/image"
-import { Github, Linkedin, Mail, Brain, Database, Code } from "lucide-react"
+import { Github, Linkedin, Mail, Brain, Code } from "lucide-react"
 
 export default function Hero() {
   return (
@@ -71,9 +71,9 @@ export default function Hero() {
               <p className="text-sm text-gray-400">Deep Learning Expert</p>
             </div>
             <div className="card-gradient p-4 rounded-lg">
-              <Database className="w-8 h-8 text-indigo-400 mb-2" />
-              <h3 className="font-semibold">Data</h3>
-              <p className="text-sm text-gray-400">Big Data & Analytics</p>
+              <Brain className="w-8 h-8 text-indigo-400 mb-2" />
+              <h3 className="font-semibold">Research ML</h3>
+              <p className="text-sm text-gray-400">Machine Learning Research</p>
             </div>
             <div className="card-gradient p-4 rounded-lg">
               <Code className="w-8 h-8 text-indigo-400 mb-2" />
