@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 
 export default function Footer() {
   return (
@@ -13,11 +13,22 @@ export default function Footer() {
           viewport={{ once: true }}
           className="text-center text-gray-400 text-sm"
         >
-          <p>Website built by A S Aravinthakshan</p>
-          <p className="mt-2">© {new Date().getFullYear()} All rights reserved.</p>
+          <p>
+            Website built by{" "}
+            <a
+              href="https://linkedin.com/in/aravinthakshan"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#6366F1] hover:text-white transition-colors"
+            >
+              A S Aravinthakshan
+            </a>
+          </p>
+          <p className="mt-2">
+            © {new Date().getFullYear()} All rights reserved.
+          </p>
         </motion.div>
       </div>
     </footer>
-  )
+  );
 }
-

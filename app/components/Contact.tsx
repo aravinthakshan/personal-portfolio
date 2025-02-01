@@ -67,6 +67,19 @@ export default function Contact({ id }: { id?: string }) {
             </a>
           ))}
         </motion.div>
+
+        <div className="mt-12 text-center">
+          <p className="text-gray-400 mb-4">
+            Want to learn more about my journey and expertise?
+          </p>
+          <Link
+            href="/about"
+            className="inline-flex items-center text-[#6366F1] hover:text-[#4F46E5] transition-colors"
+          >
+            View my full profile
+            <ArrowRight className="w-4 h-4 ml-2" />
+          </Link>
+        </div>
       </div>
     </section>
   );
