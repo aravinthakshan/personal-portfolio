@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Github, ExternalLink } from "lucide-react";
+import { Github, ExternalLink, ArrowUpRight } from "lucide-react";
 
 const projects = [
   {
@@ -61,14 +61,10 @@ const projects = [
   },
 ];
 
-export default function Projects() {
+export default function Projects({ id }: { id?: string }) {
   return (
-    <section
-      id="projects"
-      className="py-20 px-6 bg-gray-900/30 relative overflow-hidden"
-    >
-      <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-indigo-500/20 blur-[120px] rounded-full" />
-      <div className="max-w-7xl mx-auto relative z-10">
+    <section id={id} className="py-20 px-6 bg-[#0A0B14]">
+      <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -83,7 +79,8 @@ export default function Projects() {
             Showcasing my best work in AI and software development.
           </p>
         </motion.div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project, index) => (
             <motion.div
               key={project.title}
@@ -91,49 +88,54 @@ export default function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="card-gradient rounded-xl overflow-hidden group"
+              className="group relative bg-[#1A1B23] rounded-xl overflow-hidden"
             >
-              <div className="relative h-64">
+              <div className="aspect-video relative">
                 <Image
                   src={project.image || "/placeholder.svg"}
                   alt={project.title}
                   fill
-                  className="object-cover transition-transform group-hover:scale-105"
+                  className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                <div className="absolute bottom-4 left-4 flex gap-2">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1A1B23] to-transparent" />
+              </div>
+              <div className="p-6">
+                <div className="flex items-start justify-between">
+                  <h3 className="text-xl font-semibold text-white group-hover:text-[#6366F1] transition-colors">
+                    {project.title}
+                  </h3>
+                  <ArrowUpRight className="w-5 h-5 text-[#6366F1] opacity-0 group-hover:opacity-100 transition-opacity" />
+                </div>
+                <p className="mt-2 text-gray-400 text-sm line-clamp-3">
+                  {project.description}
+                </p>
+                <div className="mt-4 flex flex-wrap gap-2">
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="bg-indigo-600/90 px-3 py-1 rounded-full text-sm text-white"
+                      className="text-xs px-2 py-1 rounded-full bg-[#6366F1]/10 text-[#6366F1]"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-4 text-indigo-400">
-                  {project.title}
-                </h3>
-                <p className="text-gray-300 mb-4">{project.description}</p>
-                <div className="flex gap-4">
+                <div className="mt-6 flex items-center gap-4">
                   <a
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-gray-400 hover:text-indigo-400 transition-colors"
+                    className="flex items-center gap-2 text-sm text-gray-400 hover:text-[#6366F1] transition-colors"
                   >
-                    <Github className="w-5 h-5" />
-                    <span>Code</span>
+                    <Github className="w-4 h-4" />
+                    <span>View Code</span>
                   </a>
                   <a
                     href={project.demo}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-gray-400 hover:text-indigo-400 transition-colors"
+                    className="flex items-center gap-2 text-sm text-gray-400 hover:text-[#6366F1] transition-colors"
                   >
-                    <ExternalLink className="w-5 h-5" />
+                    <ExternalLink className="w-4 h-4" />
                     <span>Live Demo</span>
                   </a>
                 </div>
