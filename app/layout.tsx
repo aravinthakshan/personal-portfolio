@@ -14,9 +14,9 @@ export const metadata: Metadata = {
   description:
     "Portfolio of A S Aravinthakshan - Machine Learning Engineer and Full Stack Developer",
   icons: {
-    icon: [{ url: "/favicon.ico" }, { url: "/favicon.png", type: "image/png" }],
-    apple: [{ url: "/apple-icon.png" }],
-    shortcut: ["/favicon.ico"],
+    icon: [{ url: "/favicon.png" }, { url: "/favicon.png", type: "image/png" }],
+    apple: [{ url: "/favicon.png" }],
+    shortcut: ["/favicon.png"],
   },
   openGraph: {
     type: "website",
