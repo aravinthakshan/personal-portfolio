@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     siteName: "Your Name Portfolio",
     images: [
       {
-        url: "/preview,png", // Path to your OG image in public folder
+        url: "/preview.png", // Path to your OG image in public folder
         width: 1200,
         height: 630,
         alt: "Portfolio Preview",
