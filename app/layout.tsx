@@ -10,6 +10,46 @@ export const metadata: Metadata = {
   title: "A S Aravinthakshan - ML Engineer & Full Stack Developer",
   description:
     "Portfolio of A S Aravinthakshan - Machine Learning Engineer and Full Stack Developer",
+
+  openGraph: {
+    type: "website",
+    title: "A S Aravinthakshan - Portfolio",
+    description: "ML Engineer & Full Stack Developer Portfolio",
+    siteName: "A S Aravinthakshan",
+    images: [
+      {
+        url: "/favicon.png",
+        width: 1200,
+        height: 630,
+        alt: "A S Aravinthakshan Portfolio Preview",
+      },
+    ],
+    locale: "en_US",
+  },
+
+  // Twitter
+  twitter: {
+    card: "summary_large_image",
+    title: "A S Aravinthakshan - Portfolio",
+    description: "ML Engineer & Full Stack Developer Portfolio",
+    images: ["/favicon.png"],
+    creator: "@yourusername",
+  },
+
+  // Additional metadata for other platforms
+  other: {
+    "discord:image": "/favicon.png",
+    "discord:title": "A S Aravinthakshan - Portfolio",
+    "discord:description": "ML Engineer & Full Stack Developer Portfolio",
+
+    "linkedin:image": "/favicon.png",
+    "linkedin:title": "A S Aravinthakshan - Portfolio",
+    "linkedin:description": "ML Engineer & Full Stack Developer Portfolio",
+
+    "whatsapp:image": "/favicon.png",
+    "whatsapp:title": "A S Aravinthakshan - Portfolio",
+    "whatsapp:description": "ML Engineer & Full Stack Developer Portfolio",
+  },
 };
 
 export default function RootLayout({
