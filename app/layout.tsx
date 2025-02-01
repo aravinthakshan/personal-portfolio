@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   description:
     "Portfolio of A S Aravinthakshan - Machine Learning Engineer and Full Stack Developer",
   icons: {
-    icon: "/favicon.ico",
+    icon: "/favicon.png",
   },
   openGraph: {
     type: "website",
