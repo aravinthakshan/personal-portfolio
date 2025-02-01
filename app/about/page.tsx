@@ -42,7 +42,7 @@ export default function About() {
         >
           <div className="relative aspect-[4/5] w-full max-w-md">
             <Image
-              src="/placeholder.svg"
+              src="/main.jpeg"
               alt="Profile"
               fill
               className="object-cover rounded-xl"
