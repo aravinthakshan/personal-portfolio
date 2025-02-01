@@ -1,34 +1,65 @@
 import type { Metadata } from "next";
 import type React from "react";
+// app/layout.tsx
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    "https://aravinthakshan-git-main-aravinthakshans-projects.vercel.app/"
+  ),
   title: "A S Aravinthakshan - Portfolio",
   description: "ML Engineer & Full Stack Developer Portfolio",
+
+  // Open Graph / Facebook / WhatsApp / Instagram / Discord
   openGraph: {
-    title: "A S Aravintakshan - Portfolio",
+    type: "website",
+    title: "A S Aravinthakshan - Portfolio",
     description: "ML Engineer & Full Stack Developer Portfolio",
-    url: "https://aravinthakshan-git-main-aravinthakshans-projects.vercel.app/",
-    siteName: "Your Name Portfolio",
+    siteName: "A S Aravinthakshan",
     images: [
       {
-        url: "/preview.png", // Path to your OG image in public folder
+        url: "/preview.png",
         width: 1200,
         height: 630,
-        alt: "Portfolio Preview",
+        alt: "A S Aravinthakshan Portfolio Preview",
       },
     ],
     locale: "en_US",
-    type: "website",
   },
+
+  // Twitter
   twitter: {
     card: "summary_large_image",
-    title: "A S Aravinthakshan- Portfolio",
+    title: "A S Aravinthakshan - Portfolio",
     description: "ML Engineer & Full Stack Developer Portfolio",
-    images: ["/og-image.jpg"],
+    images: ["/preview.png"],
     creator: "@yourusername",
   },
-};
 
+  // Additional metadata for other platforms
+  other: {
+    "discord:image": "/preview.png",
+    "discord:title": "A S Aravinthakshan - Portfolio",
+    "discord:description": "ML Engineer & Full Stack Developer Portfolio",
+
+    "linkedin:image": "/preview.png",
+    "linkedin:title": "A S Aravinthakshan - Portfolio",
+    "linkedin:description": "ML Engineer & Full Stack Developer Portfolio",
+
+    "whatsapp:image": "/preview.png",
+    "whatsapp:title": "A S Aravinthakshan - Portfolio",
+    "whatsapp:description": "ML Engineer & Full Stack Developer Portfolio",
+  },
+
+  // Basic metadata
+  keywords: [
+    "ML Engineer",
+    "Full Stack Developer",
+    "Portfolio",
+    "A S Aravinthakshan",
+  ],
+  authors: [{ name: "A S Aravinthakshan" }],
+  robots: "index, follow",
+};
 export default function RootLayout({
   children,
 }: {
