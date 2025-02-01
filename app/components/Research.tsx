@@ -62,7 +62,6 @@ export default function Research({ id }: { id?: string }) {
                   fill
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1A1B23] to-transparent" />
               </div>
               <div className="p-6">
                 <div className="flex items-start justify-between">
