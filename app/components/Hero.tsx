@@ -29,14 +29,14 @@ export default function Hero() {
           </div>
 
           <div className="flex gap-4">
-            <motion.button
+            <motion.a
+              href="/about"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="px-6 py-3 bg-indigo-600 text-white rounded-lg flex items-center gap-2"
             >
-              <Mail className="w-4 h-4" />
-              Contact Me
-            </motion.button>
+              About Me
+            </motion.a>
             <motion.a
               href="/cv.pdf"
               whileHover={{ scale: 1.05 }}
