@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import { Mail, Phone, Github, Linkedin } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { Link } from "next/link"; // This import is missing
 
 export default function Contact({ id }: { id?: string }) {
   return (
