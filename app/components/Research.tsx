@@ -40,8 +40,8 @@ const timelineData = [
 
 export default function ResearchTimeline({ id }: { id?: string }) {
   return (
-    <section id={id} className="py-20 px-6 bg-[#0A0B14]">
-      <div className="max-w-4xl mx-auto">
+    <section id={id} className="py-20 px-6 bg-[#0A0B14] overflow-x-auto">
+      <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -57,62 +57,53 @@ export default function ResearchTimeline({ id }: { id?: string }) {
           </p>
         </motion.div>
 
-        <div className="relative">
-          {/* Vertical line */}
-          <div className="absolute left-8 top-0 w-1 h-full bg-indigo-600/20 md:left-1/2 md:-ml-0.5" />
+        <div className="relative min-w-max">
+          <div className="absolute top-28 left-0 w-full h-1 bg-indigo-600/20" />
 
-          {timelineData.map((item, index) => (
-            <motion.div
-              key={item.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
-              viewport={{ once: true }}
-              className="relative mb-12"
-            >
-              <div
-                className={`flex items-center md:justify-between ${
-                  index % 2 === 0 ? "md:flex-row-reverse" : ""
-                }`}
+          <div className="flex gap-8">
+            {timelineData.map((item, index) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
+                viewport={{ once: true }}
+                className="relative w-96"
               >
-                {/* Content container */}
-                <div className="ml-24 md:ml-0 md:w-5/12">
-                  <div className="bg-[#1A1B23] p-6 rounded-xl">
-                    <span className="text-indigo-500 font-semibold">
-                      {item.date}
-                    </span>
-                    <div className="relative w-full aspect-video mt-4 rounded-lg overflow-hidden">
-                      <Image
-                        src={item.image}
-                        alt={item.title}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <h3 className="text-xl font-semibold text-white mt-4">
-                      {item.title}
-                    </h3>
-                    <p className="mt-2 text-gray-400">{item.description}</p>
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      {item.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="text-xs px-2 py-1 rounded-full bg-indigo-600/10 text-indigo-400"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
+                <div className="bg-[#1A1B23] p-6 rounded-xl">
+                  <span className="text-indigo-500 font-semibold">
+                    {item.date}
+                  </span>
+                  <div className="relative w-full aspect-video mt-4 rounded-lg overflow-hidden">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <h3 className="text-xl font-semibold text-white mt-4">
+                    {item.title}
+                  </h3>
+                  <p className="mt-2 text-gray-400">{item.description}</p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {item.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-xs px-2 py-1 rounded-full bg-indigo-600/10 text-indigo-400"
+                      >
+                        {tag}
+                      </span>
+                    ))}
                   </div>
                 </div>
 
-                {/* Timeline dot */}
-                <div className="absolute left-8 w-4 h-4 bg-indigo-600 rounded-full md:left-1/2 md:-ml-2">
+                <div className="absolute top-28 left-1/2 -ml-2 w-4 h-4 bg-indigo-600 rounded-full">
                   <div className="w-4 h-4 bg-indigo-600 rounded-full animate-ping" />
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
