@@ -26,6 +26,13 @@ const research = [
       "Designing a custom clustering algorithm for small object detection in wildlife monitoring using UAVs.",
     tags: ["Computer Vision", "Clustering", "Wildlife Monitoring"],
   },
+  {
+    title:
+      "Research Internship at KLIV (Kharagpur Learning, Imaging & Visualization (KLIV)",
+    image: "/Indian-Statistical-Institute-ISI.png",
+    description: "Working on Federated Learning.",
+    tags: ["Computer Vision", "Clustering", "Wildlife Monitoring"],
+  },
 ];
 
 export default function Research({ id }: { id?: string }) {
