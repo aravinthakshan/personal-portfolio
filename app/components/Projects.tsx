@@ -1,8 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState, useRef, useEffect } from "react";
+import { motion, useAnimation } from "framer-motion";
 import Image from "next/image";
-import { Github, ExternalLink, ArrowUpRight } from "lucide-react";
+import { Github, ExternalLink } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const projects = [
   {
@@ -29,8 +31,8 @@ const projects = [
       "A document analysis application using FastAPI (backend) and React (frontend) to process and analyze text from documents, or just free form large corpus of texr or user inputs, powered by Google Gemini AI and LangChain.",
     image: "/RAG.png",
     tags: ["RAG", "NLP", "Backend Development"],
-    github: "https://github.com/username/project2",
-    demo: "https://demo.com/project2",
+    github: "https://github.com/username/project3",
+    demo: "https://demo.com/project3",
   },
   {
     title: "Agentic Desktop Automation",
@@ -38,8 +40,8 @@ const projects = [
       "An intelligent agent that organizes your desktop, manages files, automates emails, interacts with your browser, and streamlines daily tasks seamlessly.",
     image: "/Agentics.jpg",
     tags: ["RAG", "Agentic AI", "Docker"],
-    github: "https://github.com/username/project2",
-    demo: "https://demo.com/project2",
+    github: "https://github.com/username/project4",
+    demo: "https://demo.com/project4",
   },
   {
     title: "OpenCV Hand and Face Tracker",
@@ -47,8 +49,8 @@ const projects = [
       "A computer vision application using OpenCV to track hand gestures and facial features while detecting background objects in real-time. Deployed seamlessly on Streamlit for interactive visualization.",
     image: "/Opencv.jpg",
     tags: ["Computer Vision", "AI", "Streamlit", "Object Detection"],
-    github: "https://github.com/username/project2",
-    demo: "https://demo.com/project2",
+    github: "https://github.com/username/project5",
+    demo: "https://demo.com/project5",
   },
   {
     title: "JavaTorch",
@@ -56,21 +58,67 @@ const projects = [
       "A deep learning framework built on Java, a basic level replica of pytorch's functionalities in java.",
     image: "/javatorch.png",
     tags: ["Deep Learning", "AI", "Java", "PyTorch"],
-    github: "https://github.com/username/project2",
-    demo: "https://demo.com/project2",
+    github: "https://github.com/username/project6",
+    demo: "https://demo.com/project6",
   },
 ];
 
 export default function Projects({ id }: { id?: string }) {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+  const controls = useAnimation();
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const scrollWidth = container.scrollWidth;
+    const clientWidth = container.clientWidth;
+
+    const scroll = () => {
+      if (!isDragging) {
+        if (container.scrollLeft >= scrollWidth - clientWidth) {
+          container.scrollLeft = 0;
+        } else {
+          container.scrollLeft += 1;
+        }
+      }
+    };
+
+    const intervalId = setInterval(scroll, 50);
+
+    return () => clearInterval(intervalId);
+  }, [isDragging]);
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    setStartX(e.pageX - containerRef.current!.offsetLeft);
+    setScrollLeft(containerRef.current!.scrollLeft);
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+    const x = e.pageX - containerRef.current!.offsetLeft;
+    const walk = (x - startX) * 2;
+    containerRef.current!.scrollLeft = scrollLeft - walk;
+  };
+
   return (
-    <section id={id} className="py-20 px-6 bg-[#0A0B14]">
+    <section id={id} className="py-10 px-6 bg-[#0A0B14] overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="mb-12"
+          className="mb-8"
         >
           <h2 className="text-3xl font-bold gradient-text">
             Featured Projects
@@ -80,36 +128,44 @@ export default function Projects({ id }: { id?: string }) {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div
+          ref={containerRef}
+          className="flex overflow-x-hidden space-x-6 py-4 cursor-grab active:cursor-grabbing"
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
+          onMouseMove={handleMouseMove}
+        >
           {projects.map((project, index) => (
             <motion.div
               key={project.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="group relative bg-[#1A1B23] rounded-xl overflow-hidden"
+              className="flex-shrink-0 w-[250px] relative group"
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
+              animate={controls}
             >
-              <div className="aspect-video relative">
-                <Image
-                  src={project.image || "/placeholder.svg"}
-                  alt={project.title}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="p-6">
-                <div className="flex items-start justify-between">
-                  <h3 className="text-xl font-semibold text-white group-hover:text-[#6366F1] transition-colors">
-                    {project.title}
-                  </h3>
-                  <ArrowUpRight className="w-5 h-5 text-[#6366F1] opacity-0 group-hover:opacity-100 transition-opacity" />
+              <AnimatedCard isHovered={hoveredIndex === index}>
+                <div className="aspect-[3/4] relative mb-4">
+                  <Image
+                    src={project.image || "/placeholder.svg"}
+                    alt={project.title}
+                    fill
+                    className="object-cover rounded-lg"
+                  />
                 </div>
-                <p className="mt-2 text-gray-400 text-sm line-clamp-3">
+                <h3 className="text-lg font-semibold text-white group-hover:text-[#6366F1] transition-colors line-clamp-1">
+                  {project.title}
+                </h3>
+                <p
+                  className={cn(
+                    "mt-2 text-gray-400 text-sm transition-all duration-300 ease-in-out",
+                    hoveredIndex === index ? "line-clamp-none" : "line-clamp-2"
+                  )}
+                >
                   {project.description}
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
+                  {project.tags.slice(0, 2).map((tag) => (
                     <span
                       key={tag}
                       className="text-xs px-2 py-1 rounded-full bg-[#6366F1]/10 text-[#6366F1]"
@@ -118,7 +174,7 @@ export default function Projects({ id }: { id?: string }) {
                     </span>
                   ))}
                 </div>
-                <div className="mt-6 flex items-center gap-4">
+                <div className="mt-4 flex items-center gap-4">
                   <a
                     href={project.github}
                     target="_blank"
@@ -126,7 +182,7 @@ export default function Projects({ id }: { id?: string }) {
                     className="flex items-center gap-2 text-sm text-gray-400 hover:text-[#6366F1] transition-colors"
                   >
                     <Github className="w-4 h-4" />
-                    <span>View Code</span>
+                    <span>Code</span>
                   </a>
                   <a
                     href={project.demo}
@@ -135,14 +191,43 @@ export default function Projects({ id }: { id?: string }) {
                     className="flex items-center gap-2 text-sm text-gray-400 hover:text-[#6366F1] transition-colors"
                   >
                     <ExternalLink className="w-4 h-4" />
-                    <span>Live Demo</span>
+                    <span>Demo</span>
                   </a>
                 </div>
-              </div>
+              </AnimatedCard>
             </motion.div>
           ))}
         </div>
       </div>
     </section>
+  );
+}
+
+function AnimatedCard({
+  children,
+  isHovered,
+}: {
+  children: React.ReactNode;
+  isHovered: boolean;
+}) {
+  return (
+    <div className="relative h-full">
+      <motion.div
+        className={cn(
+          "absolute inset-0 bg-[#1A1B23] rounded-xl border border-[#6366F1]/20",
+          isHovered ? "opacity-100" : "opacity-100"
+        )}
+        layoutId="hoverBackground"
+        initial={false}
+        animate={{
+          scale: isHovered ? 1.05 : 1,
+          boxShadow: isHovered
+            ? "0 10px 30px -15px rgba(99, 102, 241, 0.4)"
+            : "0 0 0 0 rgba(0, 0, 0, 0)",
+        }}
+        transition={{ duration: 0.2 }}
+      />
+      <div className="relative z-10 p-4 h-full">{children}</div>
+    </div>
   );
 }
