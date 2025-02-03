@@ -24,7 +24,20 @@ body {
 }
 
 .card-gradient {
-  background: linear-gradient(145deg, rgba(var(--muted), 0.5), rgba(var(--muted), 0.2));
+  background: linear-gradient(
+    145deg,
+    rgba(var(--muted), 0.5),
+    rgba(var(--muted), 0.2)
+  );
   backdrop-filter: blur(10px);
 }
 
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+}
