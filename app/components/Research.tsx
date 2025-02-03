@@ -32,7 +32,7 @@ const timelineData = [
   {
     date: "August 2024",
     title: "Research Internship at KLIV",
-    image: "/Indian-Statistical-Institute-ISI.png",
+    image: "/IIT.svg",
     description: "Working on Federated Learning.",
     tags: ["Federated Learning", "Computer Vision", "Machine Learning"],
   },
