@@ -66,21 +66,18 @@ const projects = [
 export default function Projects({ id }: { id?: string }) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
-  const controls = useAnimation();
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
-    const scrollWidth = container.scrollWidth;
-    const clientWidth = container.clientWidth;
-
     const scroll = () => {
-      if (!isDragging) {
-        if (container.scrollLeft >= scrollWidth - clientWidth) {
+      if (!isPaused) {
+        if (
+          container.scrollLeft >=
+          container.scrollWidth - container.clientWidth
+        ) {
           container.scrollLeft = 0;
         } else {
           container.scrollLeft += 1;
@@ -89,29 +86,11 @@ export default function Projects({ id }: { id?: string }) {
     };
 
     const intervalId = setInterval(scroll, 50);
-
     return () => clearInterval(intervalId);
-  }, [isDragging]);
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    setIsDragging(true);
-    setStartX(e.pageX - containerRef.current!.offsetLeft);
-    setScrollLeft(containerRef.current!.scrollLeft);
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging) return;
-    const x = e.pageX - containerRef.current!.offsetLeft;
-    const walk = (x - startX) * 2;
-    containerRef.current!.scrollLeft = scrollLeft - walk;
-  };
+  }, [isPaused]);
 
   return (
-    <section id={id} className="py-10 px-6 bg-[#0A0B14] overflow-hidden">
+    <section id={id} className="py-10 px-6 bg-[#0A0B14]">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -130,22 +109,21 @@ export default function Projects({ id }: { id?: string }) {
 
         <div
           ref={containerRef}
-          className="flex overflow-x-hidden space-x-6 py-4 cursor-grab active:cursor-grabbing"
-          onMouseDown={handleMouseDown}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseUp}
-          onMouseMove={handleMouseMove}
+          className="flex space-x-6 overflow-x-hidden"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
         >
           {projects.map((project, index) => (
             <motion.div
               key={project.title}
-              className="flex-shrink-0 w-[250px] relative group"
+              className="flex-shrink-0 w-[300px]"
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
-              animate={controls}
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
             >
-              <AnimatedCard isHovered={hoveredIndex === index}>
-                <div className="aspect-[3/4] relative mb-4">
+              <div className="bg-[#1A1B23] rounded-xl border border-[#6366F1]/20 p-4 h-full">
+                <div className="aspect-[16/9] relative mb-4">
                   <Image
                     src={project.image || "/placeholder.svg"}
                     alt={project.title}
@@ -153,19 +131,19 @@ export default function Projects({ id }: { id?: string }) {
                     className="object-cover rounded-lg"
                   />
                 </div>
-                <h3 className="text-lg font-semibold text-white group-hover:text-[#6366F1] transition-colors line-clamp-1">
+                <h3 className="text-lg font-semibold text-white group-hover:text-[#6366F1] line-clamp-1">
                   {project.title}
                 </h3>
                 <p
                   className={cn(
-                    "mt-2 text-gray-400 text-sm transition-all duration-300 ease-in-out",
+                    "mt-2 text-gray-400 text-sm",
                     hoveredIndex === index ? "line-clamp-none" : "line-clamp-2"
                   )}
                 >
                   {project.description}
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
-                  {project.tags.slice(0, 2).map((tag) => (
+                  {project.tags.map((tag) => (
                     <span
                       key={tag}
                       className="text-xs px-2 py-1 rounded-full bg-[#6366F1]/10 text-[#6366F1]"
@@ -179,7 +157,7 @@ export default function Projects({ id }: { id?: string }) {
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-sm text-gray-400 hover:text-[#6366F1] transition-colors"
+                    className="flex items-center gap-2 text-sm text-gray-400 hover:text-[#6366F1]"
                   >
                     <Github className="w-4 h-4" />
                     <span>Code</span>
@@ -188,46 +166,17 @@ export default function Projects({ id }: { id?: string }) {
                     href={project.demo}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-sm text-gray-400 hover:text-[#6366F1] transition-colors"
+                    className="flex items-center gap-2 text-sm text-gray-400 hover:text-[#6366F1]"
                   >
                     <ExternalLink className="w-4 h-4" />
                     <span>Demo</span>
                   </a>
                 </div>
-              </AnimatedCard>
+              </div>
             </motion.div>
           ))}
         </div>
       </div>
     </section>
-  );
-}
-
-function AnimatedCard({
-  children,
-  isHovered,
-}: {
-  children: React.ReactNode;
-  isHovered: boolean;
-}) {
-  return (
-    <div className="relative h-full">
-      <motion.div
-        className={cn(
-          "absolute inset-0 bg-[#1A1B23] rounded-xl border border-[#6366F1]/20",
-          isHovered ? "opacity-100" : "opacity-100"
-        )}
-        layoutId="hoverBackground"
-        initial={false}
-        animate={{
-          scale: isHovered ? 1.05 : 1,
-          boxShadow: isHovered
-            ? "0 10px 30px -15px rgba(99, 102, 241, 0.4)"
-            : "0 0 0 0 rgba(0, 0, 0, 0)",
-        }}
-        transition={{ duration: 0.2 }}
-      />
-      <div className="relative z-10 p-4 h-full">{children}</div>
-    </div>
   );
 }
