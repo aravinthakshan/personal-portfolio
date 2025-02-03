@@ -90,14 +90,14 @@ export default function Projects({ id }: { id?: string }) {
   }, [isPaused]);
 
   return (
-    <section id={id} className="py-10 px-6 bg-[#0A0B14]">
+    <section id={id} className="h-[450px] py-10 px-6 bg-[#0A0B14]">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="mb-8"
+          className="mb-4"
         >
           <h2 className="text-3xl font-bold gradient-text">
             Featured Projects
@@ -109,21 +109,21 @@ export default function Projects({ id }: { id?: string }) {
 
         <div
           ref={containerRef}
-          className="flex space-x-6 overflow-x-hidden"
+          className="flex space-x-6 overflow-hidden h-[300px]"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
           {projects.map((project, index) => (
             <motion.div
               key={project.title}
-              className="flex-shrink-0 w-[300px]"
+              className="flex-shrink-0 w-[250px]"
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2 }}
             >
-              <div className="bg-[#1A1B23] rounded-xl border border-[#6366F1]/20 p-4 h-full">
-                <div className="aspect-[16/9] relative mb-4">
+              <div className="bg-[#1A1B23] rounded-xl border border-[#6366F1]/20 p-3 h-[280px]">
+                <div className="aspect-[16/9] relative mb-2">
                   <Image
                     src={project.image || "/placeholder.svg"}
                     alt={project.title}
@@ -131,44 +131,39 @@ export default function Projects({ id }: { id?: string }) {
                     className="object-cover rounded-lg"
                   />
                 </div>
-                <h3 className="text-lg font-semibold text-white group-hover:text-[#6366F1] line-clamp-1">
+                <h3 className="text-base font-semibold text-white group-hover:text-[#6366F1] line-clamp-1">
                   {project.title}
                 </h3>
-                <p
-                  className={cn(
-                    "mt-2 text-gray-400 text-sm",
-                    hoveredIndex === index ? "line-clamp-none" : "line-clamp-2"
-                  )}
-                >
+                <p className="mt-1 text-gray-400 text-xs line-clamp-2">
                   {project.description}
                 </p>
-                <div className="mt-4 flex flex-wrap gap-2">
+                <div className="mt-2 flex flex-wrap gap-1">
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="text-xs px-2 py-1 rounded-full bg-[#6366F1]/10 text-[#6366F1]"
+                      className="text-[10px] px-1.5 py-0.5 rounded-full bg-[#6366F1]/10 text-[#6366F1]"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
-                <div className="mt-4 flex items-center gap-4">
+                <div className="mt-2 flex items-center gap-3">
                   <a
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-sm text-gray-400 hover:text-[#6366F1]"
+                    className="flex items-center gap-1 text-xs text-gray-400 hover:text-[#6366F1]"
                   >
-                    <Github className="w-4 h-4" />
+                    <Github className="w-3 h-3" />
                     <span>Code</span>
                   </a>
                   <a
                     href={project.demo}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-sm text-gray-400 hover:text-[#6366F1]"
+                    className="flex items-center gap-1 text-xs text-gray-400 hover:text-[#6366F1]"
                   >
-                    <ExternalLink className="w-4 h-4" />
+                    <ExternalLink className="w-3 h-3" />
                     <span>Demo</span>
                   </a>
                 </div>

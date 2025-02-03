@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 
 const timelineData = [
@@ -39,20 +39,11 @@ const timelineData = [
 ];
 
 export default function ResearchTimeline({ id }: { id?: string }) {
-  const containerRef = React.useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
-  const pathLength = useTransform(scrollYProgress, [0, 1], [0, 1]); // Moved useTransform outside the map
-
   return (
     <section
       id={id}
       className="py-12 px-6 bg-[#0A0B14] relative overflow-hidden"
-      ref={containerRef}
     >
-      {/* Starry background */}
       {[...Array(50)].map((_, i) => (
         <div
           key={i}
@@ -81,113 +72,102 @@ export default function ResearchTimeline({ id }: { id?: string }) {
           </p>
         </motion.div>
 
-        <div className="relative w-full h-[600px] overflow-hidden">
-          {timelineData.map((item, index) => {
-            const isEven = index % 2 === 0;
-            const xPos = 200 + index * 400; // Increased spacing between items
-            const yPos = isEven ? 150 : 450;
-            const prevX = index > 0 ? 200 + (index - 1) * 400 : null;
-            const prevY = index > 0 ? (isEven ? 450 : 150) : null;
+        <div className="flex flex-col gap-12 relative">
+          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-indigo-600/20 transform -translate-x-1/2" />
 
-            return (
-              <React.Fragment key={item.title}>
-                {index > 0 && (
-                  <motion.svg
-                    className="absolute left-0 top-0 w-full h-full"
-                    style={{
-                      zIndex: 0,
-                      pathLength: pathLength, // Use the pathLength variable here
-                    }}
+          {timelineData.map((item, index) => (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className={`flex items-center gap-8 ${
+                index % 2 === 0 ? "flex-row" : "flex-row-reverse"
+              } relative`}
+            >
+              <div className="w-1/2 flex justify-end">
+                {index % 2 === 0 && (
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    className="max-w-md bg-[#1A1B23] p-4 rounded-lg shadow-lg"
                   >
-                    <motion.path
-                      d={`M ${prevX} ${prevY} H ${
-                        (xPos + prevX!) / 2
-                      } V ${yPos} H ${xPos}`}
-                      stroke="rgba(99, 102, 241, 0.2)"
-                      strokeWidth="2"
-                      fill="none"
-                      initial={{ pathLength: 0 }}
-                      animate={{ pathLength: 1 }}
-                      transition={{ duration: 1, delay: index * 0.5 }}
-                    />
-                  </motion.svg>
+                    <div className="relative w-full aspect-video rounded-lg overflow-hidden mb-3">
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <h3 className="text-sm font-semibold text-indigo-400 mb-2">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-400 text-xs mb-3">
+                      {item.description}
+                    </p>
+                    <div className="flex flex-wrap gap-1">
+                      {item.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-[10px] px-1.5 py-0.5 rounded-full bg-indigo-600/10 text-indigo-400"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </motion.div>
                 )}
+              </div>
+
+              <div className="absolute left-1/2 transform -translate-x-1/2 flex flex-col items-center">
+                <span className="bg-indigo-600 text-white px-4 py-1 rounded-full text-sm font-medium mb-2">
+                  {item.date}
+                </span>
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.2 }}
-                  viewport={{ once: true }}
-                  className="absolute z-10"
-                  style={{
-                    left: xPos,
-                    top: yPos,
-                    transform: "translate(-50%, -50%)",
-                  }}
+                  whileHover={{ scale: 1.2 }}
+                  className="w-4 h-4 bg-indigo-600 rounded-full relative"
                 >
-                  <div className="relative">
-                    {/* Date label */}
-                    <motion.div
-                      className={`absolute ${
-                        isEven ? "-top-8" : "-bottom-8"
-                      } left-1/2 transform -translate-x-1/2 whitespace-nowrap`}
-                      whileHover={{ scale: 1.05 }}
-                    >
-                      <span className="bg-indigo-600 text-white px-4 py-1 rounded-full text-sm font-medium shadow-lg">
-                        {item.date}
-                      </span>
-                    </motion.div>
-
-                    {/* Timeline dot */}
-                    <motion.div
-                      className="w-4 h-4 bg-indigo-600 rounded-full relative"
-                      whileHover={{ scale: 1.2 }}
-                    >
-                      <div className="absolute inset-0 w-4 h-4 rounded-full border-4 border-[#0A0B14]" />
-                      <div className="absolute inset-0 bg-indigo-600 rounded-full animate-ping opacity-75" />
-                    </motion.div>
-
-                    {/* Content card */}
-                    <motion.div
-                      className={`absolute ${
-                        isEven ? "top-8" : "bottom-8"
-                      } left-1/2 -translate-x-1/2 w-72`}
-                      whileHover={{
-                        scale: 1.02,
-                        transition: { duration: 0.2 },
-                      }}
-                    >
-                      <div className="bg-[#1A1B23] rounded-lg p-4 shadow-lg hover:shadow-indigo-500/20 transition-all duration-300">
-                        <div className="relative w-full aspect-video rounded-lg overflow-hidden mb-3">
-                          <Image
-                            src={item.image || "/placeholder.svg"}
-                            alt={item.title}
-                            fill
-                            className="object-cover"
-                          />
-                        </div>
-                        <h3 className="text-sm font-semibold text-indigo-400 mb-2 line-clamp-2">
-                          {item.title}
-                        </h3>
-                        <p className="text-gray-400 text-xs mb-3 line-clamp-3">
-                          {item.description}
-                        </p>
-                        <div className="flex flex-wrap gap-1">
-                          {item.tags.map((tag) => (
-                            <span
-                              key={tag}
-                              className="text-[10px] px-1.5 py-0.5 rounded-full bg-indigo-600/10 text-indigo-400"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </motion.div>
-                  </div>
+                  <div className="absolute inset-0 w-4 h-4 rounded-full border-4 border-[#0A0B14]" />
+                  <div className="absolute inset-0 bg-indigo-600 rounded-full animate-ping opacity-75" />
                 </motion.div>
-              </React.Fragment>
-            );
-          })}
+              </div>
+
+              <div className="w-1/2">
+                {index % 2 === 1 && (
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    className="max-w-md bg-[#1A1B23] p-4 rounded-lg shadow-lg"
+                  >
+                    <div className="relative w-full aspect-video rounded-lg overflow-hidden mb-3">
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <h3 className="text-sm font-semibold text-indigo-400 mb-2">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-400 text-xs mb-3">
+                      {item.description}
+                    </p>
+                    <div className="flex flex-wrap gap-1">
+                      {item.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-[10px] px-1.5 py-0.5 rounded-full bg-indigo-600/10 text-indigo-400"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
