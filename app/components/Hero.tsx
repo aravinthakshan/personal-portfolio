@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import Image from "next/image"
-import { Github, Linkedin, Brain, Code } from "lucide-react"
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { Github, Linkedin, Brain, Code } from "lucide-react";
 
 export default function Hero() {
   return (
@@ -167,11 +167,15 @@ export default function Hero() {
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
-            <Image src="/placeholder.svg" alt="Profile" fill className="object-cover rounded-2xl" />
+            <Image
+              src="/profile-pic.jpeg"
+              alt="Profile"
+              fill
+              className="object-cover rounded-2xl"
+            />
           </motion.div>
         </motion.div>
       </div>
     </section>
-  )
+  );
 }
-
