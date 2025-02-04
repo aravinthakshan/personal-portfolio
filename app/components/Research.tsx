@@ -1,171 +1,192 @@
 "use client";
 
-import React from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { Github, ExternalLink } from "lucide-react";
 
-const timelineData = [
+const projects = [
   {
-    date: "February 2024",
-    title: "Research Apprenticeship at Arizona State University",
-    image: "/ASU.png",
+    title: "Federated Learning Recommendation System",
     description:
-      "Working on prostate cancer stage classification using a random walk algorithm and Graph Neural Networks in collaboration with Wu-Lab.",
-    tags: ["Graph Neural Networks", "Healthcare AI", "Classification"],
+      "Designed a federated learning system allowing multiple clients to train recommendation models locally without centralizing sensitive information. Used Redis for caching and Flask backend.",
+    image: "/FL.png",
+    tags: ["Full Stack", "Software Development", "Machine Learning"],
+    github: "https://github.com/username/project1",
+    demo: "https://demo.com/project1",
   },
   {
-    date: "March 2024",
-    title: "Undergraduate Researcher at MIT Manipal",
-    image: "/manipal-logo.png",
+    title: "Sentiment Analysis Model API",
     description:
-      'Co-authored "AdaptPhishSysNet: Adaptive Phishing Detection System for Blockchains using Machine Learning" - accepted at ISBM Conference 2024.',
-    tags: ["Blockchain", "Security", "Machine Learning"],
+      "Engineered a sentiment analysis classifier hosted on Firebase with Google Cloud API. Built with React, Tailwind, and achieved 92% accuracy using DistilBERT.",
+    image: "/Sentiment.png",
+    tags: ["Machine Learning", "NLP", "Backend Development"],
+    github: "https://github.com/username/project2",
+    demo: "https://demo.com/project2",
   },
   {
-    date: "June 2024",
-    title: "Research Apprenticeship at Indian Statistical Institute",
-    image: "/Indian-Statistical-Institute-ISI.png",
+    title: "RAG Based Document Analyzer",
     description:
-      "Designing a custom clustering algorithm for small object detection in wildlife monitoring using UAVs.",
-    tags: ["Computer Vision", "Clustering", "Wildlife Monitoring"],
+      "A document analysis application using FastAPI (backend) and React (frontend) to process and analyze text from documents, or just free form large corpus of texr or user inputs, powered by Google Gemini AI and LangChain.",
+    image: "/RAG.png",
+    tags: ["RAG", "NLP", "Backend Development"],
+    github: "https://github.com/username/project3",
+    demo: "https://demo.com/project3",
   },
   {
-    date: "August 2024",
-    title: "Research Internship at KLIV",
-    image: "/IIT.svg",
-    description: "Working on Federated Learning.",
-    tags: ["Federated Learning", "Computer Vision", "Machine Learning"],
+    title: "Agentic Desktop Automation",
+    description:
+      "An intelligent agent that organizes your desktop, manages files, automates emails, interacts with your browser, and streamlines daily tasks seamlessly.",
+    image: "/Agentics.jpg",
+    tags: ["RAG", "Agentic AI", "Docker"],
+    github: "https://github.com/username/project4",
+    demo: "https://demo.com/project4",
+  },
+  {
+    title: "OpenCV Hand and Face Tracker",
+    description:
+      "A computer vision application using OpenCV to track hand gestures and facial features while detecting background objects in real-time. Deployed seamlessly on Streamlit for interactive visualization.",
+    image: "/Opencv.jpg",
+    tags: ["Computer Vision", "AI", "Streamlit", "Object Detection"],
+    github: "https://github.com/username/project5",
+    demo: "https://demo.com/project5",
+  },
+  {
+    title: "JavaTorch",
+    description:
+      "A deep learning framework built on Java, a basic level replica of pytorch's functionalities in java.",
+    image: "/javatorch.png",
+    tags: ["Deep Learning", "AI", "Java", "PyTorch"],
+    github: "https://github.com/username/project6",
+    demo: "https://demo.com/project6",
   },
 ];
 
-export default function ResearchTimeline({ id }: { id?: string }) {
-  return (
-    <section
-      id={id}
-      className="py-12 px-6 bg-[#0A0B14] relative overflow-hidden"
-    >
-      {[...Array(50)].map((_, i) => (
-        <div
-          key={i}
-          className="absolute w-1 h-1 bg-white/20 rounded-full"
-          style={{
-            top: `${Math.random() * 100}%`,
-            left: `${Math.random() * 100}%`,
-            animation: `twinkle ${Math.random() * 3 + 2}s infinite`,
-          }}
-        />
-      ))}
+const extendedProjects = [...projects, ...projects, ...projects];
 
+export default function Projects({ id }: { id?: string }) {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container || isPaused) return;
+
+    let animationFrameId: number;
+    let lastTimestamp = 0;
+    const speed = 0.3; // Reduced speed (pixels per millisecond)
+
+    const animate = (timestamp: number) => {
+      if (lastTimestamp === 0) lastTimestamp = timestamp;
+      const delta = timestamp - lastTimestamp;
+      lastTimestamp = timestamp;
+
+      if (container) {
+        container.scrollLeft += speed * delta;
+        if (container.scrollLeft >= container.scrollWidth / 3) {
+          container.scrollLeft = 0;
+        }
+      }
+
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    animationFrameId = requestAnimationFrame(animate);
+
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [isPaused]);
+
+  return (
+    <section id={id} className="py-20 px-6 bg-[#0A0B14] overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="mb-8 text-left"
+          className="mb-12"
         >
-          <h2 className="text-4xl font-bold text-indigo-500 mb-2">
-            Research Timeline
+          <h2 className="text-3xl font-bold gradient-text">
+            Featured Projects
           </h2>
-          <p className="text-gray-400 text-lg">
-            My journey in AI and Machine Learning research
+          <p className="text-gray-400 mt-2">
+            Showcasing my best work in AI and software development.
           </p>
         </motion.div>
 
-        <div className="flex flex-col gap-12 relative">
-          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-indigo-600/20 transform -translate-x-1/2" />
-
-          {timelineData.map((item, index) => (
+        <div
+          ref={containerRef}
+          className="flex space-x-6 overflow-x-scroll overflow-y-visible h-[400px] scrollbar-hide"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          {extendedProjects.map((project, index) => (
             <motion.div
-              key={item.title}
-              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              key={`${project.title}-${index}`}
+              className="flex-shrink-0 w-[300px]"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className={`flex items-center gap-8 ${
-                index % 2 === 0 ? "flex-row" : "flex-row-reverse"
-              } relative`}
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
             >
-              <div className="w-1/2 flex justify-end">
-                {index % 2 === 0 && (
-                  <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    className="max-w-md bg-[#1A1B23] p-4 rounded-lg shadow-lg"
-                  >
-                    <div className="relative w-full aspect-video rounded-lg overflow-hidden mb-3">
-                      <Image
-                        src={item.image}
-                        alt={item.title}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <h3 className="text-sm font-semibold text-indigo-400 mb-2">
-                      {item.title}
-                    </h3>
-                    <p className="text-gray-400 text-xs mb-3">
-                      {item.description}
-                    </p>
-                    <div className="flex flex-wrap gap-1">
-                      {item.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="text-[10px] px-1.5 py-0.5 rounded-full bg-indigo-600/10 text-indigo-400"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </div>
-
-              <div className="absolute left-1/2 transform -translate-x-1/2 flex flex-col items-center">
-                <span className="bg-indigo-600 text-white px-4 py-1 rounded-full text-sm font-medium mb-2">
-                  {item.date}
-                </span>
-                <motion.div
-                  whileHover={{ scale: 1.2 }}
-                  className="w-4 h-4 bg-indigo-600 rounded-full relative"
-                >
-                  <div className="absolute inset-0 w-4 h-4 rounded-full border-4 border-[#0A0B14]" />
-                  <div className="absolute inset-0 bg-indigo-600 rounded-full animate-ping opacity-75" />
-                </motion.div>
-              </div>
-
-              <div className="w-1/2">
-                {index % 2 === 1 && (
-                  <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    className="max-w-md bg-[#1A1B23] p-4 rounded-lg shadow-lg"
-                  >
-                    <div className="relative w-full aspect-video rounded-lg overflow-hidden mb-3">
-                      <Image
-                        src={item.image}
-                        alt={item.title}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <h3 className="text-sm font-semibold text-indigo-400 mb-2">
-                      {item.title}
-                    </h3>
-                    <p className="text-gray-400 text-xs mb-3">
-                      {item.description}
-                    </p>
-                    <div className="flex flex-wrap gap-1">
-                      {item.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="text-[10px] px-1.5 py-0.5 rounded-full bg-indigo-600/10 text-indigo-400"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </div>
+              <motion.div
+                className={`bg-[#1A1B23] rounded-xl border transition-all duration-300 ${
+                  hoveredIndex === index
+                    ? "border-[#6366F1] shadow-lg shadow-[#6366F1]/10"
+                    : "border-[#6366F1]/20"
+                }`}
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <div className="p-4">
+                  <div className="relative w-full aspect-video mb-4">
+                    <Image
+                      src={project.image || "/placeholder.svg"}
+                      alt={project.title}
+                      fill
+                      className="object-cover rounded-lg"
+                    />
+                  </div>
+                  <h3 className="text-lg font-semibold text-white mb-2">
+                    {project.title}
+                  </h3>
+                  <p className="text-gray-400 text-sm mb-4">
+                    {project.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-xs px-2 py-1 rounded-full bg-[#6366F1]/10 text-[#6366F1]"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-sm text-gray-400 hover:text-[#6366F1] transition-colors"
+                    >
+                      <Github className="w-4 h-4" />
+                      <span>View Code</span>
+                    </a>
+                    <a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-sm text-gray-400 hover:text-[#6366F1] transition-colors"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      <span>Live Demo</span>
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
             </motion.div>
           ))}
         </div>
