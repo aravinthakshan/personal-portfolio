@@ -44,12 +44,12 @@ export default function ResearchTimeline({ id }: { id?: string }) {
     target: containerRef,
     offset: ["start end", "end start"],
   });
-  const pathLength = useTransform(scrollYProgress, [0, 1], [0, 1]); // Moved useTransform outside the map
+  const pathLength = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
     <section
       id={id}
-      className="py-12 px-6 bg-[#0A0B14] relative overflow-hidden"
+      className="py-12 px-6 bg-[#0A0B14] relative"
       ref={containerRef}
     >
       {/* Starry background */}
@@ -81,12 +81,13 @@ export default function ResearchTimeline({ id }: { id?: string }) {
           </p>
         </motion.div>
 
-        <div className="relative w-full h-[600px] overflow-hidden">
+        {/* Changed to min-height and removed overflow-hidden */}
+        <div className="relative w-full min-h-[800px]">
           {timelineData.map((item, index) => {
             const isEven = index % 2 === 0;
-            const xPos = 200 + index * 400; // Increased spacing between items
+            const xPos = 200 + index * 300; // Reduced spacing between items
             const yPos = isEven ? 150 : 450;
-            const prevX = index > 0 ? 200 + (index - 1) * 400 : null;
+            const prevX = index > 0 ? 200 + (index - 1) * 300 : null;
             const prevY = index > 0 ? (isEven ? 450 : 150) : null;
 
             return (
@@ -94,10 +95,7 @@ export default function ResearchTimeline({ id }: { id?: string }) {
                 {index > 0 && (
                   <motion.svg
                     className="absolute left-0 top-0 w-full h-full"
-                    style={{
-                      zIndex: 0,
-                      pathLength: pathLength, // Use the pathLength variable here
-                    }}
+                    style={{ zIndex: 0, pathLength: pathLength }}
                   >
                     <motion.path
                       d={`M ${prevX} ${prevY} H ${
@@ -130,7 +128,6 @@ export default function ResearchTimeline({ id }: { id?: string }) {
                       className={`absolute ${
                         isEven ? "-top-8" : "-bottom-8"
                       } left-1/2 transform -translate-x-1/2 whitespace-nowrap`}
-                      whileHover={{ scale: 1.05 }}
                     >
                       <span className="bg-indigo-600 text-white px-4 py-1 rounded-full text-sm font-medium shadow-lg">
                         {item.date}
@@ -138,23 +135,16 @@ export default function ResearchTimeline({ id }: { id?: string }) {
                     </motion.div>
 
                     {/* Timeline dot */}
-                    <motion.div
-                      className="w-4 h-4 bg-indigo-600 rounded-full relative"
-                      whileHover={{ scale: 1.2 }}
-                    >
+                    <motion.div className="w-4 h-4 bg-indigo-600 rounded-full relative">
                       <div className="absolute inset-0 w-4 h-4 rounded-full border-4 border-[#0A0B14]" />
                       <div className="absolute inset-0 bg-indigo-600 rounded-full animate-ping opacity-75" />
                     </motion.div>
 
-                    {/* Content card */}
-                    <motion.div
+                    {/* Content card - Removed transform on hover */}
+                    <div
                       className={`absolute ${
                         isEven ? "top-8" : "bottom-8"
                       } left-1/2 -translate-x-1/2 w-72`}
-                      whileHover={{
-                        scale: 1.02,
-                        transition: { duration: 0.2 },
-                      }}
                     >
                       <div className="bg-[#1A1B23] rounded-lg p-4 shadow-lg hover:shadow-indigo-500/20 transition-all duration-300">
                         <div className="relative w-full aspect-video rounded-lg overflow-hidden mb-3">
@@ -182,7 +172,7 @@ export default function ResearchTimeline({ id }: { id?: string }) {
                           ))}
                         </div>
                       </div>
-                    </motion.div>
+                    </div>
                   </div>
                 </motion.div>
               </React.Fragment>
