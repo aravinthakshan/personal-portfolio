@@ -49,7 +49,7 @@ export default function ResearchTimeline({ id }: { id?: string }) {
   return (
     <section
       id={id}
-      className="py-12 px-6 bg-[#0A0B14] relative"
+      className="py-12 px-6 bg-[#0A0B14] relative overflow-x-auto"
       ref={containerRef}
     >
       {/* Starry background */}
@@ -65,13 +65,13 @@ export default function ResearchTimeline({ id }: { id?: string }) {
         />
       ))}
 
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-none mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="mb-8 text-left"
+          className="mb-8 text-left max-w-7xl mx-auto"
         >
           <h2 className="text-4xl font-bold text-indigo-500 mb-2">
             Research Timeline
@@ -81,13 +81,13 @@ export default function ResearchTimeline({ id }: { id?: string }) {
           </p>
         </motion.div>
 
-        {/* Changed to min-height and removed overflow-hidden */}
-        <div className="relative w-full min-h-[800px]">
+        {/* Timeline container with increased width */}
+        <div className="relative w-[2000px] min-h-[800px]">
           {timelineData.map((item, index) => {
             const isEven = index % 2 === 0;
-            const xPos = 200 + index * 300; // Reduced spacing between items
+            const xPos = 400 + index * 450; // Increased spacing between items
             const yPos = isEven ? 150 : 450;
-            const prevX = index > 0 ? 200 + (index - 1) * 300 : null;
+            const prevX = index > 0 ? 400 + (index - 1) * 450 : null;
             const prevY = index > 0 ? (isEven ? 450 : 150) : null;
 
             return (
@@ -140,11 +140,11 @@ export default function ResearchTimeline({ id }: { id?: string }) {
                       <div className="absolute inset-0 bg-indigo-600 rounded-full animate-ping opacity-75" />
                     </motion.div>
 
-                    {/* Content card - Removed transform on hover */}
+                    {/* Content card - Reduced width */}
                     <div
                       className={`absolute ${
                         isEven ? "top-8" : "bottom-8"
-                      } left-1/2 -translate-x-1/2 w-72`}
+                      } left-1/2 -translate-x-1/2 w-64`}
                     >
                       <div className="bg-[#1A1B23] rounded-lg p-4 shadow-lg hover:shadow-indigo-500/20 transition-all duration-300">
                         <div className="relative w-full aspect-video rounded-lg overflow-hidden mb-3">
