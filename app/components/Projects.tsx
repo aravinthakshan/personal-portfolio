@@ -1,10 +1,9 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { motion, useAnimation } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { Github, ExternalLink } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 const projects = [
   {
@@ -63,6 +62,8 @@ const projects = [
   },
 ];
 
+const extendedProjects = [...projects, ...projects, ...projects];
+
 export default function Projects({ id }: { id?: string }) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -70,34 +71,41 @@ export default function Projects({ id }: { id?: string }) {
 
   useEffect(() => {
     const container = containerRef.current;
-    if (!container) return;
+    if (!container || isPaused) return;
 
-    const scroll = () => {
-      if (!isPaused) {
-        if (
-          container.scrollLeft >=
-          container.scrollWidth - container.clientWidth
-        ) {
+    let animationFrameId: number;
+    let lastTimestamp = 0;
+    const speed = 0.3; // Reduced speed (pixels per millisecond)
+
+    const animate = (timestamp: number) => {
+      if (lastTimestamp === 0) lastTimestamp = timestamp;
+      const delta = timestamp - lastTimestamp;
+      lastTimestamp = timestamp;
+
+      if (container) {
+        container.scrollLeft += speed * delta;
+        if (container.scrollLeft >= container.scrollWidth / 3) {
           container.scrollLeft = 0;
-        } else {
-          container.scrollLeft += 1;
         }
       }
+
+      animationFrameId = requestAnimationFrame(animate);
     };
 
-    const intervalId = setInterval(scroll, 50);
-    return () => clearInterval(intervalId);
+    animationFrameId = requestAnimationFrame(animate);
+
+    return () => cancelAnimationFrame(animationFrameId);
   }, [isPaused]);
 
   return (
-    <section id={id} className="h-[450px] py-10 px-6 bg-[#0A0B14]">
+    <section id={id} className="py-20 px-6 bg-[#0A0B14] overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="mb-4"
+          className="mb-12"
         >
           <h2 className="text-3xl font-bold gradient-text">
             Featured Projects
@@ -109,65 +117,76 @@ export default function Projects({ id }: { id?: string }) {
 
         <div
           ref={containerRef}
-          className="flex space-x-6 overflow-hidden h-[300px]"
+          className="flex space-x-6 overflow-x-scroll overflow-y-visible h-[400px] scrollbar-hide"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          {projects.map((project, index) => (
+          {extendedProjects.map((project, index) => (
             <motion.div
-              key={project.title}
-              className="flex-shrink-0 w-[250px]"
+              key={`${project.title}-${index}`}
+              className="flex-shrink-0 w-[300px]"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.2 }}
             >
-              <div className="bg-[#1A1B23] rounded-xl border border-[#6366F1]/20 p-3 h-[280px]">
-                <div className="aspect-[16/9] relative mb-2">
-                  <Image
-                    src={project.image || "/placeholder.svg"}
-                    alt={project.title}
-                    fill
-                    className="object-cover rounded-lg"
-                  />
-                </div>
-                <h3 className="text-base font-semibold text-white group-hover:text-[#6366F1] line-clamp-1">
-                  {project.title}
-                </h3>
-                <p className="mt-1 text-gray-400 text-xs line-clamp-2">
-                  {project.description}
-                </p>
-                <div className="mt-2 flex flex-wrap gap-1">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-[10px] px-1.5 py-0.5 rounded-full bg-[#6366F1]/10 text-[#6366F1]"
+              <motion.div
+                className={`bg-[#1A1B23] rounded-xl border transition-all duration-300 ${
+                  hoveredIndex === index
+                    ? "border-[#6366F1] shadow-lg shadow-[#6366F1]/10"
+                    : "border-[#6366F1]/20"
+                }`}
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <div className="p-4">
+                  <div className="relative w-full aspect-video mb-4">
+                    <Image
+                      src={project.image || "/placeholder.svg"}
+                      alt={project.title}
+                      fill
+                      className="object-cover rounded-lg"
+                    />
+                  </div>
+                  <h3 className="text-lg font-semibold text-white mb-2">
+                    {project.title}
+                  </h3>
+                  <p className="text-gray-400 text-sm mb-4">
+                    {project.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-xs px-2 py-1 rounded-full bg-[#6366F1]/10 text-[#6366F1]"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-sm text-gray-400 hover:text-[#6366F1] transition-colors"
                     >
-                      {tag}
-                    </span>
-                  ))}
+                      <Github className="w-4 h-4" />
+                      <span>View Code</span>
+                    </a>
+                    <a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-sm text-gray-400 hover:text-[#6366F1] transition-colors"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      <span>Live Demo</span>
+                    </a>
+                  </div>
                 </div>
-                <div className="mt-2 flex items-center gap-3">
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-xs text-gray-400 hover:text-[#6366F1]"
-                  >
-                    <Github className="w-3 h-3" />
-                    <span>Code</span>
-                  </a>
-                  <a
-                    href={project.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-xs text-gray-400 hover:text-[#6366F1]"
-                  >
-                    <ExternalLink className="w-3 h-3" />
-                    <span>Demo</span>
-                  </a>
-                </div>
-              </div>
+              </motion.div>
             </motion.div>
           ))}
         </div>
