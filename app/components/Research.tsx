@@ -1,4 +1,5 @@
 "use client";
+// the spider back doesnt appear here
 
 import React from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
