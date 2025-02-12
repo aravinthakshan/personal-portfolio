@@ -13,8 +13,8 @@ export default function Home() {
       <Hero />
       <SpiderWebAnimation />
       <Experience id="experience" />
-      <Research id="research" />
-      <Projects id="projects" />
+{/*       <Research id="research" />
+      <Projects id="projects" /> */}
       <Skills id="skills" />
       <Contact id="contact" />
       <Footer />
