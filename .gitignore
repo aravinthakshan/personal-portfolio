@@ -3,7 +3,7 @@
 text.txt
 # dependencies
 /node_modules
-
+/archive
 # next.js
 /.next/
 /out/
