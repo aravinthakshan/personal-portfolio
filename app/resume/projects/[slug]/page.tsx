@@ -1,22 +1,16 @@
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowLeft, ExternalLink, Github } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { SkillTag } from "@/components/skill-tag"
-import { getProjectBySlug } from "@/lib/data"
+import { Button } from "../../components/ui/button"
+import { Card, CardContent } from "../../components/ui/card"
+import { SkillTag } from "../../components/skill-tag"
+import { getProjectBySlug } from "../../lib/data"
 import { notFound } from "next/navigation"
-import { EnhancedScrollIndicator } from "@/components/enhanced-scroll-indicator"
-import { AnimatedSection } from "@/components/animated-section"
-import { PortfolioHeader } from "@/components/portfolio-header"
+import { EnhancedScrollIndicator } from "../../components/enhanced-scroll-indicator"
+import { AnimatedSection } from "../../components/animated-section"
+import { PortfolioHeader } from "../../components/portfolio-header"
 
-interface ProjectPageProps {
-  params: {
-    slug: string
-  }
-}
-
-export default function ProjectPage({ params }: ProjectPageProps) {
+export default function ProjectPage({ params }: { params: { slug: string } }) {
   const project = getProjectBySlug(params.slug)
 
   if (!project) {
@@ -71,7 +65,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                 <CardContent className="p-4 sm:p-6">
                   <h2 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-primary-light">Project Overview</h2>
                   <div className="space-y-3 sm:space-y-4 text-sm sm:text-base text-primary-light/90">
-                    {project.description.map((paragraph, index) => (
+                    {project.description.map((paragraph: string, index: number) => (
                       <p key={index}>{paragraph}</p>
                     ))}
                   </div>
@@ -81,7 +75,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                       Key Features
                     </h3>
                     <ul className="list-disc pl-5 space-y-1 sm:space-y-2 text-sm sm:text-base text-primary-light/90">
-                      {project.features.map((feature, index) => (
+                      {project.features.map((feature: string, index: number) => (
                         <li key={index}>{feature}</li>
                       ))}
                     </ul>
@@ -92,7 +86,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                       Technologies Used
                     </h3>
                     <div className="flex flex-wrap gap-2 mb-4 sm:mb-6">
-                      {project.technologies.map((tech, index) => (
+                      {project.technologies.map((tech: string, index: number) => (
                         <SkillTag key={index}>{tech}</SkillTag>
                       ))}
                     </div>
@@ -138,7 +132,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                   <CardContent className="p-4 sm:p-6">
                     <h2 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-primary-light">Project Gallery</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
-                      {project.gallery.map((image, index) => (
+                      {project.gallery.map((image: { url: string; caption?: string }, index: number) => (
                         <AnimatedSection key={index} animation="zoom-in" delay={100 * (index + 1)}>
                           <div className="relative h-40 sm:h-48 rounded-lg overflow-hidden border border-primary-forest">
                             <Image
@@ -191,7 +185,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                   <h2 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-primary-light">More Projects</h2>
                   <div className="space-y-3 sm:space-y-4">
                     {project.relatedProjects &&
-                      project.relatedProjects.map((related, index) => (
+                      project.relatedProjects.map((related: { slug: string; title: string; category: string; image: string }, index: number) => (
                         <AnimatedSection key={index} animation="fade-up" delay={100 * (index + 1)}>
                           <Link href={`/projects/${related.slug}`} className="block group">
                             <div className="flex items-center gap-2 sm:gap-3">
