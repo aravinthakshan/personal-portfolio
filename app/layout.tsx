@@ -65,10 +65,18 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${inter.className} bg-[#0A0A0B] text-white min-h-screen`}
+        className={`${inter.className} bg-[#091717] text-[#A1A16A] min-h-screen`}
       >
         <Navigation />
         {children}
+        <footer className="bg-[#D8D8CA] py-8 px-6">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center text-[#091717] text-sm">
+              <p>Website built by A S Aravinthakshan</p>
+              <p className="mt-2">© {new Date().getFullYear()} All rights reserved.</p>
+            </div>
+          </div>
+        </footer>
       </body>
     </html>
   );

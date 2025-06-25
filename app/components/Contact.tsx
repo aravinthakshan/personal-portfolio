@@ -10,9 +10,8 @@ export default function Contact({ id }: { id?: string }) {
   return (
     <section
       id={id}
-      className="py-12 px-6 bg-[#0A0B14] relative overflow-hidden"
+      className="py-20 px-6 bg-[#091717] relative overflow-hidden"
     >
-      <div className="absolute bottom-0 right-0 w-1/3 h-1/3 bg-[#6366F1]/20 blur-[120px] rounded-full" />
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -22,7 +21,7 @@ export default function Contact({ id }: { id?: string }) {
           className="mb-8 text-center"
         >
           <h2 className="text-3xl font-bold gradient-text">Get in Touch</h2>
-          <p className="text-gray-400 mt-2">
+          <p className="text-[#A1A16A] mt-2">
             Let's collaborate on something amazing.
           </p>
         </motion.div>
@@ -61,9 +60,9 @@ export default function Contact({ id }: { id?: string }) {
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 text-gray-400 hover:text-[#6366F1] transition-colors group"
+              className="flex items-center gap-3 text-[#A1A16A] hover:text-[#5c724a] transition-colors group"
             >
-              <div className="bg-[#1A1B23] p-3 rounded-full group-hover:bg-[#6366F1]/10 transition-colors">
+              <div className="bg-[#1A1B23] p-3 rounded-full group-hover:bg-[#5c724a]/10 transition-colors">
                 <Icon className="w-5 h-5" />
               </div>
               <span className="text-sm">{text}</span>
@@ -72,12 +71,12 @@ export default function Contact({ id }: { id?: string }) {
         </motion.div>
 
         <div className="mt-12 text-center">
-          <p className="text-gray-400 mb-4">
+          <p className="text-[#A1A16A] mb-4">
             Want to learn more about my journey and expertise?
           </p>
           <Link
             href="/about"
-            className="inline-flex items-center text-[#6366F1] hover:text-[#4F46E5] transition-colors"
+            className="inline-flex items-center text-[#5c724a] hover:text-[#a3b68a] transition-colors"
           >
             View my full profile
             <ArrowRight className="w-4 h-4 ml-2" />

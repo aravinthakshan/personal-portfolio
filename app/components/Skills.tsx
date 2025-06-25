@@ -47,8 +47,7 @@ const certifications = [
 
 export default function Skills({ id }: { id?: string }) {
   return (
-    <section id={id} className="py-20 px-6 bg-[#0A0B14] relative overflow-hidden">
-      <div className="absolute top-1/2 left-0 w-1/3 h-1/3 bg-indigo-500/20 blur-[120px] rounded-full" />
+    <section id={id} className="py-20 px-6 bg-[#091717] relative overflow-hidden">
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -71,9 +70,9 @@ export default function Skills({ id }: { id?: string }) {
               viewport={{ once: true }}
               className="card-gradient rounded-xl p-4"
             >
-              <div className="text-indigo-400 mb-2">{category.icon}</div>
-              <h3 className="font-semibold mb-2">{category.title}</h3>
-              <div className="text-sm text-gray-400">
+              <div className="text-[#5c724a] mb-2">{category.icon}</div>
+              <h3 className="font-semibold mb-2 text-[#A1A16A]">{category.title}</h3>
+              <div className="text-sm text-[#A1A16A]">
                 {category.skills.map((skill, i) => (
                   <span key={skill} className="inline-block">
                     {skill}
@@ -93,8 +92,8 @@ export default function Skills({ id }: { id?: string }) {
           className="card-gradient rounded-xl p-6"
         >
           <div className="flex items-center gap-2 mb-4">
-            <Certificate className="w-6 h-6 text-indigo-400" />
-            <h3 className="text-xl font-semibold">Certifications</h3>
+            <Certificate className="w-6 h-6 text-[#5c724a]" />
+            <h3 className="text-xl font-semibold text-[#A1A16A]">Certifications</h3>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {certifications.map((cert, index) => (
@@ -104,7 +103,7 @@ export default function Skills({ id }: { id?: string }) {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-gray-800/50 rounded-lg p-3 text-gray-300"
+                className="bg-[#1A1B23]/50 rounded-lg p-3 text-[#A1A16A]"
               >
                 {cert}
               </motion.div>

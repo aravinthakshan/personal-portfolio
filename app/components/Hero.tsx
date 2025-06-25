@@ -9,7 +9,7 @@ export default function Hero() {
     <section className="min-h-screen flex items-center justify-center px-6 pt-20 relative overflow-hidden">
       {/* Background gradient */}
       <motion.div
-        className="absolute top-0 right-0 w-1/3 h-1/3 bg-indigo-500/20 blur-[120px] rounded-full"
+        className="absolute top-0 right-0 w-1/3 h-1/3 bg-[#c7b793]/20 blur-[120px] rounded-full"
         animate={{
           scale: [1, 1.2, 1],
           opacity: [0.5, 0.8, 0.5],
@@ -21,7 +21,7 @@ export default function Hero() {
         }}
       />
       <motion.div
-        className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-purple-500/20 blur-[120px] rounded-full"
+        className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-[#a3b68a]/20 blur-[120px] rounded-full"
         animate={{
           scale: [1, 1.2, 1],
           opacity: [0.5, 0.8, 0.5],
@@ -43,7 +43,7 @@ export default function Hero() {
         >
           <div className="space-y-2">
             <motion.h2
-              className="text-lg text-indigo-400 font-medium"
+              className="text-lg text-[#5c724a] font-medium"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
@@ -78,7 +78,7 @@ export default function Hero() {
               href="/about"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-6 py-3 bg-indigo-600 text-white rounded-lg flex items-center gap-2"
+              className="px-6 py-3 bg-[#c7b793] text-white rounded-lg flex items-center gap-2"
             >
               About Me
             </motion.a>
@@ -126,17 +126,17 @@ export default function Hero() {
           >
             {[
               {
-                icon: <Brain className="w-8 h-8 text-indigo-400 mb-2" />,
+                icon: <Brain className="w-8 h-8 text-[#5c724a] mb-2" />,
                 title: "ML/AI",
                 subtitle: "Deep Learning Expert",
               },
               {
-                icon: <Brain className="w-8 h-8 text-indigo-400 mb-2" />,
+                icon: <Brain className="w-8 h-8 text-[#5c724a] mb-2" />,
                 title: "Research ML",
                 subtitle: "Machine Learning Research",
               },
               {
-                icon: <Code className="w-8 h-8 text-indigo-400 mb-2" />,
+                icon: <Code className="w-8 h-8 text-[#5c724a] mb-2" />,
                 title: "Full Stack",
                 subtitle: "MERN Developer",
               },
@@ -161,7 +161,7 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="relative"
         >
-          <div className="w-full h-full absolute -z-10 bg-indigo-500/20 blur-[120px] rounded-full" />
+          <div className="w-full h-full absolute -z-10 bg-[#c7b793]/20 blur-[120px] rounded-full" />
           <motion.div
             className="relative w-full aspect-square max-w-md mx-auto"
             whileHover={{ scale: 1.05 }}

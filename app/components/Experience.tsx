@@ -63,7 +63,7 @@ const experiences = [
 
 export default function Experience({ id }: { id?: string }) {
   return (
-    <section id={id} className="py-20 px-6 bg-[#0A0B14]">
+    <section id={id} className="py-20 px-6 bg-[#091717]">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -78,7 +78,7 @@ export default function Experience({ id }: { id?: string }) {
 
         <div className="relative">
           {/* Timeline line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-[#6366F1]/20" />
+          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-[#5c724a]/20" />
 
           <div className="space-y-12">
             {experiences.map((exp, index) => (
@@ -92,11 +92,11 @@ export default function Experience({ id }: { id?: string }) {
               >
                 {/* Date on top */}
                 <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-8">
-                  <span className="bg-[#6366F1] text-white px-4 py-1 rounded-full text-sm">{exp.date}</span>
+                  <span className="bg-[#5c724a] text-[#A1A16A] px-4 py-1 rounded-full text-sm">{exp.date}</span>
                 </div>
 
                 {/* Timeline dot */}
-                <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-[#6366F1] rounded-full border-4 border-[#0A0B14]" />
+                <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-[#5c724a] rounded-full border-4 border-[#091717]" />
 
                 {/* Content card - alternating sides */}
                 <div
@@ -105,18 +105,18 @@ export default function Experience({ id }: { id?: string }) {
                   <motion.div whileHover={{ scale: 1.02 }} className="card-gradient rounded-xl p-6 max-w-xl">
                     <div className="flex items-start gap-6">
                       <div className="relative flex-shrink-0">
-                        <div className="w-12 h-12 rounded-full overflow-hidden bg-[#1A1B23] flex items-center justify-center text-[#6366F1]">
+                        <div className="w-12 h-12 rounded-full overflow-hidden bg-[#1A1B23] flex items-center justify-center text-[#5c724a]">
                           {exp.icon}
                         </div>
                       </div>
                       <div className="flex-1">
                         <div className="mb-4">
-                          <h3 className="text-xl font-semibold text-[#6366F1]">{exp.company}</h3>
-                          <p className="text-lg text-gray-300">{exp.role}</p>
-                          <p className="text-gray-400 text-sm">{exp.location}</p>
-                          <p className="text-[#6366F1] text-sm mt-1">{exp.period}</p>
+                          <h3 className="text-xl font-semibold text-[#5c724a]">{exp.company}</h3>
+                          <p className="text-lg text-[#A1A16A]">{exp.role}</p>
+                          <p className="text-[#A1A16A] text-sm">{exp.location}</p>
+                          <p className="text-[#5c724a] text-sm mt-1">{exp.period}</p>
                         </div>
-                        <p className="text-gray-300 text-sm">{exp.description}</p>
+                        <p className="text-[#A1A16A] text-sm">{exp.description}</p>
                       </div>
                     </div>
                   </motion.div>

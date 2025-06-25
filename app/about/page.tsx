@@ -11,13 +11,13 @@ export default function About() {
   };
 
   return (
-    <main className="min-h-screen bg-white text-black">
+    <main className="min-h-screen bg-[#091717] text-[#A1A16A]">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 bg-[#0A0B14] z-50">
+      <nav className="fixed top-0 left-0 right-0 bg-[#5c724a] z-50">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link
             href="/"
-            className="px-4 py-2 border-2 border-[#6366F1] text-white hover:bg-[#6366F1] transition-colors rounded-md flex items-center gap-2"
+            className="px-4 py-2 border-2 border-[#5c724a] text-[#A1A16A] hover:bg-[#a3b68a] hover:text-[#091717] transition-colors rounded-md flex items-center gap-2"
           >
             <HomeIcon className="w-4 h-4" />
             Main Dashboard
@@ -53,7 +53,7 @@ export default function About() {
               I'm Aravinthakshan, a Machine Learning Engineer & Full Stack
               Developer
             </h1>
-            <div className="h-0.5 w-24 bg-[#6366F1]" />
+            <div className="h-0.5 w-24 bg-[#a3b68a]" />
             <p className="text-gray-600 text-lg leading-relaxed">
               I specialize in developing AI-powered applications and conducting
               research in machine learning. Currently working on projects
@@ -77,9 +77,9 @@ export default function About() {
         >
           {/* Previous sections remain the same until Contact section */}
           <section>
-            <h2 className="text-2xl text-black mb-6 relative">
+            <h2 className="text-2xl text-[#5c724a] mb-6 relative">
               Areas of Expertise
-              <div className="h-0.5 w-16 bg-[#6366F1] absolute -bottom-2 left-0" />
+              <div className="h-0.5 w-16 bg-[#a3b68a] absolute -bottom-2 left-0" />
             </h2>
             <div className="grid md:grid-cols-2 gap-8">
               <div>
@@ -110,9 +110,9 @@ export default function About() {
           </section>
 
           <section>
-            <h2 className="text-2xl text-black mb-6 relative">
+            <h2 className="text-2xl text-[#5c724a] mb-6 relative">
               Research Interests
-              <div className="h-0.5 w-16 bg-[#6366F1] absolute -bottom-2 left-0" />
+              <div className="h-0.5 w-16 bg-[#a3b68a] absolute -bottom-2 left-0" />
             </h2>
             <ul className="space-y-2">
               <li>
@@ -125,9 +125,9 @@ export default function About() {
           </section>
 
           <section>
-            <h2 className="text-2xl text-black mb-6 relative">
+            <h2 className="text-2xl text-[#5c724a] mb-6 relative">
               Professional Philosophy
-              <div className="h-0.5 w-16 bg-[#6366F1] absolute -bottom-2 left-0" />
+              <div className="h-0.5 w-16 bg-[#a3b68a] absolute -bottom-2 left-0" />
             </h2>
             <p className="text-lg leading-relaxed">
               I believe in building technology that not only pushes the
@@ -140,9 +140,9 @@ export default function About() {
           </section>
 
           <section>
-            <h2 className="text-2xl text-black mb-6 relative">
+            <h2 className="text-2xl text-[#5c724a] mb-6 relative">
               Current Focus
-              <div className="h-0.5 w-16 bg-[#6366F1] absolute -bottom-2 left-0" />
+              <div className="h-0.5 w-16 bg-[#a3b68a] absolute -bottom-2 left-0" />
             </h2>
             <ul className="space-y-2">
               <li>
@@ -160,25 +160,25 @@ export default function About() {
 
           {/* Contact Section */}
           <section id="contact" className="pt-8">
-            <h2 className="text-2xl text-black mb-6 relative">
+            <h2 className="text-2xl text-[#5c724a] mb-6 relative">
               Contact
-              <div className="h-0.5 w-16 bg-[#6366F1] absolute -bottom-2 left-0" />
+              <div className="h-0.5 w-16 bg-[#a3b68a] absolute -bottom-2 left-0" />
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               <a
                 href="mailto:aravinthakshanmain@gmail.com"
-                className="flex items-center gap-3 text-gray-600 hover:text-[#6366F1] transition-colors group"
+                className="flex items-center gap-3 text-[#A1A16A] hover:text-[#5c724a] transition-colors group"
               >
-                <div className="bg-gray-100 p-3 rounded-full group-hover:bg-[#6366F1]/10 transition-colors">
+                <div className="bg-[#1A1B23] p-3 rounded-full group-hover:bg-[#a3b68a]/10 transition-colors">
                   <Mail className="w-5 h-5" />
                 </div>
                 <span className="text-sm">Email</span>
               </a>
               <a
                 href="tel:+918754563674"
-                className="flex items-center gap-3 text-gray-600 hover:text-[#6366F1] transition-colors group"
+                className="flex items-center gap-3 text-[#A1A16A] hover:text-[#5c724a] transition-colors group"
               >
-                <div className="bg-gray-100 p-3 rounded-full group-hover:bg-[#6366F1]/10 transition-colors">
+                <div className="bg-[#1A1B23] p-3 rounded-full group-hover:bg-[#a3b68a]/10 transition-colors">
                   <Phone className="w-5 h-5" />
                 </div>
                 <span className="text-sm">Phone</span>
@@ -187,9 +187,9 @@ export default function About() {
                 href="https://github.com/aravinthakshan"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 text-gray-600 hover:text-[#6366F1] transition-colors group"
+                className="flex items-center gap-3 text-[#A1A16A] hover:text-[#5c724a] transition-colors group"
               >
-                <div className="bg-gray-100 p-3 rounded-full group-hover:bg-[#6366F1]/10 transition-colors">
+                <div className="bg-[#1A1B23] p-3 rounded-full group-hover:bg-[#a3b68a]/10 transition-colors">
                   <Github className="w-5 h-5" />
                 </div>
                 <span className="text-sm">GitHub</span>
@@ -198,9 +198,9 @@ export default function About() {
                 href="https://linkedin.com/in/aravinthakshan"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 text-gray-600 hover:text-[#6366F1] transition-colors group"
+                className="flex items-center gap-3 text-[#A1A16A] hover:text-[#5c724a] transition-colors group"
               >
-                <div className="bg-gray-100 p-3 rounded-full group-hover:bg-[#6366F1]/10 transition-colors">
+                <div className="bg-[#1A1B23] p-3 rounded-full group-hover:bg-[#a3b68a]/10 transition-colors">
                   <Linkedin className="w-5 h-5" />
                 </div>
                 <span className="text-sm">LinkedIn</span>
@@ -209,24 +209,6 @@ export default function About() {
           </section>
         </motion.div>
       </div>
-
-      {/* Footer */}
-      <footer className="bg-[#0A0B14] py-8 px-6">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="text-center text-gray-400 text-sm"
-          >
-            <p>Website built by A S Aravinthakshan</p>
-            <p className="mt-2">
-              © {new Date().getFullYear()} All rights reserved.
-            </p>
-          </motion.div>
-        </div>
-      </footer>
     </main>
   );
 }

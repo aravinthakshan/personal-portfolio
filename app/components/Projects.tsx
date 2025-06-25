@@ -100,7 +100,7 @@ export default function Projects({ id }: { id?: string }) {
   }, [isPaused]);
 
   return (
-    <section id={id} className="py-20 px-6 bg-[#0A0B14] overflow-hidden">
+    <section id={id} className="py-20 px-6 bg-[#091717] overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -134,10 +134,10 @@ export default function Projects({ id }: { id?: string }) {
               onMouseLeave={() => setHoveredIndex(null)}
             >
               <motion.div
-                className={`bg-[#1A1B23] rounded-xl border transition-all duration-300 ${
+                className={`bg-[#5c724a] rounded-xl border transition-all duration-300 ${
                   hoveredIndex === index
-                    ? "border-[#6366F1] shadow-lg shadow-[#6366F1]/10"
-                    : "border-[#6366F1]/20"
+                    ? "border-[#a3b68a] shadow-lg shadow-[#a3b68a]/10"
+                    : "border-[#a3b68a]/20"
                 }`}
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300 }}

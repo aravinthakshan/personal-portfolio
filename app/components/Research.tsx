@@ -50,7 +50,7 @@ export default function ResearchTimeline({ id }: { id?: string }) {
   return (
     <section
       id={id}
-      className="py-12 px-6 bg-[#0A0B14] relative overflow-x-auto"
+      className="py-12 px-6 bg-[#091717] relative overflow-x-auto"
       ref={containerRef}
     >
       {/* Starry background */}
@@ -147,7 +147,7 @@ export default function ResearchTimeline({ id }: { id?: string }) {
                         isEven ? "top-8" : "bottom-8"
                       } left-1/2 -translate-x-1/2 w-64`}
                     >
-                      <div className="bg-[#1A1B23] rounded-lg p-4 shadow-lg hover:shadow-indigo-500/20 transition-all duration-300">
+                      <div className="bg-[#5c724a] rounded-lg p-4 shadow-lg hover:shadow-[#a3b68a]/20 transition-all duration-300">
                         <div className="relative w-full aspect-video rounded-lg overflow-hidden mb-3">
                           <Image
                             src={item.image || "/placeholder.svg"}
@@ -156,17 +156,17 @@ export default function ResearchTimeline({ id }: { id?: string }) {
                             className="object-cover"
                           />
                         </div>
-                        <h3 className="text-sm font-semibold text-indigo-400 mb-2 line-clamp-2">
+                        <h3 className="text-sm font-semibold text-[#5c724a] mb-2 line-clamp-2">
                           {item.title}
                         </h3>
-                        <p className="text-gray-400 text-xs mb-3 line-clamp-3">
+                        <p className="text-[#f5f5d5] text-xs mb-3 line-clamp-3">
                           {item.description}
                         </p>
                         <div className="flex flex-wrap gap-1">
                           {item.tags.map((tag) => (
                             <span
                               key={tag}
-                              className="text-[10px] px-1.5 py-0.5 rounded-full bg-indigo-600/10 text-indigo-400"
+                              className="text-[10px] px-1.5 py-0.5 rounded-full bg-[#a3b68a]/10 text-[#a3b68a]"
                             >
                               {tag}
                             </span>

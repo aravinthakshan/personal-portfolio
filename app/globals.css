@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 :root {
-  --background: 10, 11, 20;
-  --foreground: 255, 255, 255;
-  --accent: 99, 102, 241;
-  --accent-light: 129, 140, 248;
-  --accent-foreground: 255, 255, 255;
-  --muted: 30, 31, 40;
-  --muted-foreground: 156, 163, 175;
+  --background: 53, 74, 47; /* #354a2f */
+  --foreground: 245, 245, 213; /* #f5f5d5 */
+  --accent: 199, 183, 147; /* #c7b793 */
+  --accent-light: 163, 182, 138; /* #a3b68a */
+  --accent-foreground: 53, 74, 47; /* #354a2f */
+  --muted: 92, 114, 74; /* #5c724a */
+  --muted-foreground: 245, 245, 213; /* #f5f5d5 */
 }
 
 body {
@@ -18,7 +18,7 @@ body {
 }
 
 .gradient-text {
-  background: linear-gradient(to right, rgb(99, 102, 241), rgb(129, 140, 248));
+  background: linear-gradient(to right, rgb(199, 183, 147), rgb(163, 182, 138));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
