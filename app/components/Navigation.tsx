@@ -43,6 +43,12 @@ export default function Navigation() {
               {section}
             </button>
           ))}
+          <Link
+            href="/projects"
+            className="text-[#a3b68a] hover:text-[#5c724a] transition-colors capitalize px-4 py-2"
+          >
+            Projects
+          </Link>
           <motion.button
             onClick={() => scrollToSection("contact")}
             whileHover={{ scale: 1.05 }}
@@ -80,6 +86,12 @@ export default function Navigation() {
                 {section}
               </button>
             ))}
+            <Link
+              href="/projects"
+              className="text-[#a3b68a] hover:text-[#5c724a] transition-colors capitalize text-left px-4 py-2"
+            >
+              Projects
+            </Link>
             <motion.button
               onClick={() => scrollToSection("contact")}
               whileTap={{ scale: 0.95 }}
